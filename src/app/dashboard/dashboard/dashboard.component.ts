@@ -10,23 +10,21 @@ import { Subscription } from "rxjs";
 })
 export class DashboardComponent implements OnInit {
   orders:Order[] = [];
-  order: Order | undefined;
+  order: Order | any;
   private ordersSub: Subscription = new Subscription;
 
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-    let interval = setInterval(() => {
-    this.postService.getOrder();
-    this.ordersSub = this.postService.getOrderUpdateListener()
-     .subscribe((orders: Order[])=>{
-      if(orders){
-
-      }
-       this.orders = orders;
+    // let interval = setInterval(() => {
+    this.postService.getOrder()
+    this.ordersSub = this.postService.getOrdUpdateListener()
+    .subscribe((order)=>{
+      console.log("fetched from dashboard order: ", order)
+      // this.order = order;
+      // console.log("fetched from dashboard this order: ", this.order)
       });
-      console.log("fetched", this.orders)
-    }, 5000)
+    // }, 5000)
   //   let interval = setInterval(() => {
   //     this.postService.getOrders
   // }, 2000)

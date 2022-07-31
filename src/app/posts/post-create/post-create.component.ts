@@ -12,7 +12,7 @@ export class PostCreateComponent{
   enteredTitle = ''
   enteredContent = '';
 
-  tableId = "2";
+  tableId = "1";
 
   constructor(public postService: PostService){
 
