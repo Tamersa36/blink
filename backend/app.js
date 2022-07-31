@@ -78,7 +78,7 @@ app.get('/api/order', (req, res, next)=>{
     .then(docs =>{
       res.status(200).json({
         message: 'Order fetched successfully!',
-        orders: docs
+        order: docs
       });
     });
 });

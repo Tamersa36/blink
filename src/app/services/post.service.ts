@@ -8,8 +8,10 @@ import { map } from "rxjs";
 export class PostService{
   private posts: Post[] = [];
   private orders: Order[] = [];
+  private order: Order | any;
   private postsUpdated = new Subject<Post[]>();
   private ordersUpdated = new Subject<Order[]>();
+  private orderUpdated = new Subject<Order>();
 
   constructor(private http: HttpClient){}
 
@@ -53,12 +55,14 @@ export class PostService{
     });
   }
   getOrder(){
-    this.http.get<{message: string, orders: any }>(
+    this.http.get<{message: string, order: Order }>(
     'http://localhost:3000/api/order'
     )
-
-      this.orders = this.orders;
-      this.ordersUpdated.next([...this.orders])
+      .subscribe(order =>{
+        console.log('from service: ', order)
+        this.order = order;
+        this.orderUpdated.next(this.order)
+      })
   }
 
   getPostUpdateListener(){
@@ -66,6 +70,9 @@ export class PostService{
   }
   getOrderUpdateListener(){
     return this.ordersUpdated.asObservable();
+  }
+  getOrdUpdateListener(){
+    return this.orderUpdated.asObservable();
   }
 
   addOrder(tableId: string, content: string, status: string){
