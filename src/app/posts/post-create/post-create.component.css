@@ -2,8 +2,14 @@ mat-card{
   width: 80%;
   margin: auto;
   margin-top: 1rem;
-  background-color: rgba(185, 185, 185, 0.346);
 
+}
+
+p{
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 mat-form-field,

@@ -15,12 +15,24 @@
   align-items: center;
   flex-direction: column;
   p{
+    color: black;
     font-size: 17px;
     font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   }
+
 }
 .mat-card{
   top: 50%;
 
 }
+
+.error-msg{
+  padding-top: 10px;
+  color: red;
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+

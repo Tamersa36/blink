@@ -14,6 +14,7 @@ import { PostService } from 'src/app/services/post.service';
 export class TableEntranceComponent implements OnInit {
   private tableExistsSub: Subscription = new Subscription;
   table: Table | any;
+  tableCheck = false;
 
   constructor(private shareData: ShareDataService, private router: Router, private postService: PostService) { }
 
@@ -33,10 +34,20 @@ export class TableEntranceComponent implements OnInit {
     this.postService.getTableCredentials(this.tableFormControl.value,this.passFormControl.value);
       this.tableExistsSub = this.postService.getTableExistsSubUpdateListener()
       .subscribe((request)=>{
-        console.log("req",request)
+        this.check(request);
       });
 
-    // this.router.navigateByUrl('/table');
-
+    }
+    check(request: any) {
+      if(request.table==='true'){
+        console.log("zobi")
+        this.router.navigateByUrl('/table');
+      }
+      else{
+        console.log(request.table)
+        this.tableCheck = true;
+      }
   }
-}
+  }
+
+
