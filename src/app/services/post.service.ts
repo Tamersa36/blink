@@ -86,11 +86,11 @@ export class PostService{
   }
 
   //check if table exist in DB
-  getTableCredentials(table:string, password:string){
+  getTableCredentials(tableId:string, password:string){
     let params = new HttpParams();
-    params = params.append('table', table);
+    params = params.append('tableId', tableId);
     params = params.append('password', password);
-    this.http.get<{message: string, table: string }>(
+    this.http.get<{message: string, table: Table }>(
     'http://localhost:3000/api/table',
     {params: params}
     )
@@ -115,6 +115,7 @@ export class PostService{
     return this.tableUpdated.asObservable();
   }
   getTableExistsSubUpdateListener(){
+    console.log(this.tableUpdated.asObservable())
     return this.tableExistsUpdated.asObservable();
   }
 }

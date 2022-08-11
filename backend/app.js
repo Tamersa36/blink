@@ -82,13 +82,12 @@ app.get('/api/tables', (req, res, next)=>{
 
 //check if table exist in DB
 app.get('/api/table', (req, res, next)=>{
-  // const filter = { 'table': req.tableId, 'password': req.password };
-  const filter = { 'table': req.params.tableId, 'password': req.params.password };
+  const filter = { 'tableId': req.query.tableId ,'password': req.query.password };
   Table.findOne(filter)
     .then(docs =>{
       res.status(200).json({
         message: 'table fetched successfully!',
-        table: docs
+        table: docs? "true":"false"
       });
     });
 });
