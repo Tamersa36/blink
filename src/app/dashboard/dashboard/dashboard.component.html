@@ -1,4 +1,16 @@
-<p>Table id:</p>
+<!-- <p>Table id:</p>
 {{order.tableId}}
 <p>Order: </p>
 {{order.content}}
+
+
+<div *ngFor="let key of orders">
+  <div>{{key.tableId}},{{key.content}}</div>
+</div>
+
+<h3>Cart</h3>
+
+<div class="cart-item" *ngFor="let item of orders">
+  <span>{{ item.tableId }}</span>
+  <span>{{ item.content | currency }}</span>
+</div> -->

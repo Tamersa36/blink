@@ -1,16 +1,31 @@
-<p>Enter Number</p>
 
-<form class="example-form">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Table</mat-label>
-    <input type="text" matInput [formControl]="emailFormControl" placeholder="Ex. 1..">
-    <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-      Please enter a valid email address
-    </mat-error>
-    <mat-error *ngIf="emailFormControl.hasError('required')">
-      Email is <strong>required</strong>
-    </mat-error> -->
-    <br><br>
-    <button (click)="onEnterTable()" mat-raised-button color="primary">Enter Table</button>
-  </mat-form-field>
-</form>
+  <mat-card>
+<div class="parent">
+  <p>Table Interance</p>
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Table</mat-label>
+      <input type="text" matInput [formControl]="tableFormControl" placeholder="Ex. 1..">
+      <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error> -->
+      <br><br>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input type="text" matInput [formControl]="passFormControl" placeholder="Pass..">
+      <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error> -->
+      <br><br>
+    </mat-form-field>
+  </form>
+  <button (click)="onEnterTable()" mat-raised-button color="primary">Enter Table</button>
+</div>
+</mat-card>

@@ -22,13 +22,13 @@ export class PostCreateComponent implements OnInit {
     this.tableId = this.shareData.get()
     console.log('table id from order: ', this.tableId)
   }
-  onAddPost(form: NgForm){
-    if(form.invalid){
-      return;
-    }
-    this.postService.addPost(form.value.title, form.value.content);
-    form.resetForm();
-  }
+  // onAddPost(form: NgForm){
+  //   if(form.invalid){
+  //     return;
+  //   }
+  //   this.postService.addPost(form.value.title, form.value.content);
+  //   form.resetForm();
+  // }
 
   onCallWaiter(){
     this.postService.addOrder(this.tableId,"CallWaiter","CREATED");

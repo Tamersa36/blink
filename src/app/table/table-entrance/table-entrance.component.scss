@@ -2,8 +2,25 @@
   min-width: 150px;
   max-width: 500px;
   width: 100%;
+
 }
 
 .example-full-width {
   width: 100%;
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  p{
+    font-size: 17px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+}
+.mat-card{
+  top: 50%;
+
 }
