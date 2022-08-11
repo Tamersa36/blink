@@ -1,39 +1,46 @@
 import { Injectable } from "@angular/core";
-import { Post } from "../models/Post";
-import { Order } from "../models/Order";
 import { Subject } from "rxjs";
-import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs";
+import { HttpClient, HttpParams} from "@angular/common/http";
+
+import { Order } from "../models/Order";
+import { Table } from "../models/Table";
+
+
 @Injectable({providedIn: 'root'})
+
 export class PostService{
-  private posts: Post[] = [];
+
   private orders: Order[] = [];
+  private tables: Table[] | any;
+
   private order: Order | any;
-  private postsUpdated = new Subject<Post[]>();
+  private table: Table | any;
+  private tableExists: string | any;
+
   private ordersUpdated = new Subject<Order[]>();
+  private tablesUpdated = new Subject<Table[]>();
+
   private orderUpdated = new Subject<Order>();
+  private tableUpdated = new Subject<Table>();
+  private tableExistsUpdated = new Subject<string>();
 
   constructor(private http: HttpClient){}
 
-  getPosts(){
-    this.http.get<{message: string, posts: any }>(
-    'http://localhost:3000/api/posts'
-    )
-    .pipe(map((postData) => {
-      return postData.posts.map((post: { title: any; content: any; _id: any; })=>{
-        return{
-          title: post.title,
-          content: post.content,
-          id: post._id
-        };
-      })
-    }))
-    .subscribe(transformedPosts =>{
-      this.posts = transformedPosts;
-      this.postsUpdated.next([...this.posts])
+////fetch Apis's////
 
+  //post order
+  addOrder(tableId: string, content: string, status: string){
+    const order: Order={id:'', tableId: tableId, content: content, status: status};
+    this.http.post<{message: string}>('http://localhost:3000/api/orders',order)
+    .subscribe((responseData) => {
+      console.log(responseData.message);
+      this.orders.push(order);
+      this.ordersUpdated.next([...this.orders]);
     });
   }
+
+//get orders
   getOrders(){
     this.http.get<{message: string, orders: any }>(
     'http://localhost:3000/api/orders'
@@ -54,6 +61,7 @@ export class PostService{
 
     });
   }
+  //get one order
   getOrder(){
     this.http.get<{message: string, order: Order }>(
     'http://localhost:3000/api/order'
@@ -65,33 +73,48 @@ export class PostService{
       })
   }
 
-  getPostUpdateListener(){
-    return this.postsUpdated.asObservable();
+  //get all tables
+  getTables(){
+    this.http.get<{message: string, table: Table }>(
+    'http://localhost:3000/api/tables'
+    )
+      .subscribe(tables =>{
+        console.log('from service: ', tables)
+        this.tables = tables;
+        this.tablesUpdated.next(this.tables)
+      })
   }
+
+  //check if table exist in DB
+  getTableCredentials(table:string, password:string){
+    let params = new HttpParams();
+    params = params.append('table', table);
+    params = params.append('password', password);
+    this.http.get<{message: string, table: string }>(
+    'http://localhost:3000/api/table',
+    {params: params}
+    )
+      .subscribe(table =>{
+        console.log('from service: ', table)
+        this.tableExists = table;
+        this.tableExistsUpdated.next(this.tableExists)
+      })
+  }
+
+
   getOrderUpdateListener(){
     return this.ordersUpdated.asObservable();
   }
   getOrdUpdateListener(){
     return this.orderUpdated.asObservable();
   }
-
-  addOrder(tableId: string, content: string, status: string){
-    const order: Order={id:'', tableId: tableId, content: content, status: status};
-    this.http.post<{message: string}>('http://localhost:3000/api/orders',order)
-    .subscribe((responseData) => {
-      console.log(responseData.message);
-      this.orders.push(order);
-      this.ordersUpdated.next([...this.orders]);
-    });
+  getTablesUpdateListener(){
+    return this.tablesUpdated.asObservable();
   }
-
-  addPost(title: string, content: string){
-    const post: Post={id:'', title: title, content: content};
-    this.http.post<{message: string}>('http://localhost:3000/api/posts',post)
-    .subscribe((responseData) => {
-      console.log(responseData.message);
-      this.posts.push(post);
-      this.postsUpdated.next([...this.posts]);
-    });
+  getTableUpdateListener(){
+    return this.tableUpdated.asObservable();
+  }
+  getTableExistsSubUpdateListener(){
+    return this.tableExistsUpdated.asObservable();
   }
 }

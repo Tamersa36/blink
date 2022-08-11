@@ -15,27 +15,36 @@ export class DashboardComponent implements OnInit {
   constructor(private postService: PostService) { }
 
   ngOnInit(): void {
-    let interval = setInterval(() => {
-    this.postService.getOrder()
-    this.ordersSub = this.postService.getOrdUpdateListener()
-    .subscribe((request)=>{
-      // this.raw(this.obj)
-      this.raw(request)
-      // this.order = order;
-      // console.log("fetched from dashboard this order: ", this.order)
-      });
-    }, 5000)
-  //   let interval = setInterval(() => {
-  //     this.postService.getOrders
-  // }, 2000)
+    this.startInterval()
   }
   ngOnDestroy(): void {
     this.ordersSub.unsubscribe();
   }
 
-  raw(req: any){
-    this.order = req.order
-    // console.log("fetched from dashboard order: ", req.order.content)
+  startInterval(){
+    // let interval = setInterval(() => {
+      console.log(this.orders);
+      this.postService.getOrder();
+      this.ordersSub = this.postService.getOrdUpdateListener()
+      .subscribe((request)=>{
+        // this.raw(this.obj)
+        this.raw(request);
+        // this.order = order;
+        // console.log("fetched from dashboard this order: ", this.order)
+      });
+      // }, 5000)
+      //   let interval = setInterval(() => {
+        //     this.postService.getOrders
+        // }, 2000)
+      }
+
+      raw(req: any){
+        // this.order = req.order
+        if(req.order){
+    this.orders.push(req.order)
+    console.log(this.orders);
+  }
+  // console.log("fetched from dashboard order: ", req.order.content)
   }
 
   obj = {

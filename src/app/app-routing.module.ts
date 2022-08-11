@@ -11,13 +11,13 @@ const routes: Routes = [
 
 },
 {
-  path: '',
+  path: 'table',
   component: PostCreateComponent,
 
 }
 ,
 {
-  path: 'table',
+  path: '',
   component: TableEntranceComponent,
 
 }
