@@ -16,3 +16,10 @@ mat-form-field,
 textarea{
   width: 100%;
 }
+
+mat-grid-tile {
+  background: lightblue;
+}
+mat-grid-tile-content{
+  border: 5px;
+}
