@@ -57,7 +57,7 @@ export class PostService{
     }))
     .subscribe(transformedOrders =>{
       this.orders = transformedOrders;
-      this.ordersUpdated.next([...this.orders])
+      this.ordersUpdated.next([...this.orders])//copy of array
 
     });
   }
@@ -69,7 +69,7 @@ export class PostService{
       .subscribe(order =>{
         console.log('from service: ', order)
         this.order = order;
-        this.orderUpdated.next(this.order)
+        this.orderUpdated.next({...this.order})//copy of objext
       })
   }
 
@@ -81,7 +81,7 @@ export class PostService{
       .subscribe(tables =>{
         console.log('from service: ', tables)
         this.tables = tables;
-        this.tablesUpdated.next(this.tables)
+        this.tablesUpdated.next([...this.tables])
       })
   }
 
@@ -97,7 +97,7 @@ export class PostService{
       .subscribe(table =>{
         console.log('from service: ', table)
         this.tableExists = table;
-        this.tableExistsUpdated.next(this.tableExists)
+        this.tableExistsUpdated.next({...this.tableExists})
       })
   }
 
@@ -115,7 +115,6 @@ export class PostService{
     return this.tableUpdated.asObservable();
   }
   getTableExistsSubUpdateListener(){
-    console.log(this.tableUpdated.asObservable())
     return this.tableExistsUpdated.asObservable();
   }
 }

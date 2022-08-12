@@ -25,10 +25,10 @@ export class TableEntranceComponent implements OnInit {
   }
   tableFormControl = new FormControl('', [Validators.required]);
   passFormControl = new FormControl('', [Validators.required]);
-
+  tableId: any;
   onEnterTable(){
-    let tableId = this.tableFormControl.value;
-    this.shareData.set(tableId);
+    this.tableId = this.tableFormControl.value;
+    this.shareData.set(this.tableId);
     console.log(this.tableFormControl.value,this.passFormControl.value);
 
     this.postService.getTableCredentials(this.tableFormControl.value,this.passFormControl.value);
@@ -41,9 +41,12 @@ export class TableEntranceComponent implements OnInit {
     check(request: any) {
       if(request.table==='true'){
         console.log("zobi")
+        sessionStorage.setItem('tableId', this.tableId);
+        console.log(sessionStorage)
         this.router.navigateByUrl('/table');
       }
       else{
+        console.log(sessionStorage)
         console.log(request.table)
         this.tableCheck = true;
       }
