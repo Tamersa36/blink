@@ -15,6 +15,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list'
+import{MatSidenavModule} from '@angular/material/sidenav'
 
 
 import { AppComponent } from './app.component';
@@ -23,6 +25,9 @@ import { HeaderComponent } from './header/header.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { TableEntranceComponent } from './table/table-entrance/table-entrance.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { FooterComponent } from './footer/footer/footer.component';
+
 
 
 @NgModule({
@@ -32,7 +37,9 @@ import { TableEntranceComponent } from './table/table-entrance/table-entrance.co
     HeaderComponent,
     PostListComponent,
     DashboardComponent,
-    TableEntranceComponent
+    TableEntranceComponent,
+    SidebarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +51,8 @@ import { TableEntranceComponent } from './table/table-entrance/table-entrance.co
     MatCardModule,
     MatButtonModule,
     MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
     MatExpansionModule,
     MatIconModule,
     MatGridListModule,

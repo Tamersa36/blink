@@ -1,16 +1,37 @@
-<!-- <p>Table id:</p>
-{{order.tableId}}
-<p>Order: </p>
-{{order.content}}
+<!-- <mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Admin</h1>
+    <span class="menu-spacer"></span>
+    <div> -->
+      <!-- <a mat-button [routerLink]="'/accounts'"> Accounts </a>
+      <a mat-button [routerLink]="'/create-account'"> Create Account </a>
+      <a mat-button [routerLink]="'/contacts'"> Contacts </a>
+      <a mat-button [routerLink]="'/create-contact'"> Create Contact </a>
+      <a mat-button [routerLink]="'/activities'"> Activities </a>
+      <a mat-button [routerLink]="'/create-activity'"> Create Activity </a> -->
 
+    <!-- </div>
+  </mat-toolbar-row>
+</mat-toolbar> -->
+<app-header></app-header>
+<div>
 
-<div *ngFor="let key of orders">
-  <div>{{key.tableId}},{{key.content}}</div>
+  <mat-drawer-container class="dashboard">
+    <mat-drawer mode="side" opened>
+      <app-sidebar></app-sidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+      <mat-grid-list cols="2" rowHeight="2:1">
+        <mat-grid-tile>1</mat-grid-tile>
+        <mat-grid-tile>2</mat-grid-tile>
+        <mat-grid-tile>3</mat-grid-tile>
+        <mat-grid-tile>4</mat-grid-tile>
+      </mat-grid-list>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>
+<app-footer></app-footer>
 
-<h3>Cart</h3>
-
-<div class="cart-item" *ngFor="let item of orders">
-  <span>{{ item.tableId }}</span>
-  <span>{{ item.content | currency }}</span>
-</div> -->

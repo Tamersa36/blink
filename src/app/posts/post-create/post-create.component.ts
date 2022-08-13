@@ -6,7 +6,7 @@ import { ShareDataService } from "src/app/services/share-data.service";
 @Component({
   selector: 'app-post-create',
   templateUrl: './post-create.component.html',
-  styleUrls: ['./post-create.component.css']
+  styleUrls: ['./post-create.component.scss']
 
 })
 export class PostCreateComponent implements OnInit {
