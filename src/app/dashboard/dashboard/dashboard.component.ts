@@ -17,18 +17,16 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchOrders()
-    setInterval(() => this.fetchOrders(), 5000);
+    setInterval(() => this.fetchOrders(), 2000);
   }
   ngOnDestroy(): void {
     this.ordersSub.unsubscribe();
   }
 
   fetchOrders(){
-    debugger;
-      console.log("1",this.orders);
-      this.postService.getOrder();
-      this.ordersSub = this.postService.getOrdUpdateListener()
+      this.postService.getOrderTest()
       .subscribe((request)=>{
+        console.log(request)
         this.raw(request);
       });
       }
@@ -40,23 +38,10 @@ export class DashboardComponent implements OnInit {
       console.log(this.orders);
   }
   }
-    //   fetchOrders(){
-    // // let interval = setInterval(() => {
-    //   console.log(this.orders);
-    //   this.postService.getOrder();
-    //   this.ordersSub = this.postService.getOrdUpdateListener()
-    //   .subscribe((request)=>{
-    //     // this.raw(this.obj)
-    //     this.raw(request);
-    //     // this.order = order;
-    //     // console.log("fetched from dashboard this order: ", this.order)
-    //   });
-    //   // }, 5000)
-    //   //   let interval = setInterval(() => {
-    //     //     this.postService.getOrders
-    //     // }, 2000)
-    //   }
 
-
+  onCompleteOrder(i: any){
+    this.orders.splice(i,1);
+    console.log("compelete",this.orders)
+  }
 
 }
