@@ -1,3 +1,6 @@
+:root{
+  --primary: #DD9200;
+}
 :host {
   display: flex;
   flex-direction: column;
@@ -13,4 +16,22 @@ mat-drawer-container {
 
 mat-drawer-content {
   padding: 20px;
+}
+
+.ordersContainer{
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+
+  .orderContent{
+    font-size: 18px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace
+
+  }
+  .mat-fab {
+    left:60px;
+    top:-35px;
+    background-color: #DD9200;
+  }
 }

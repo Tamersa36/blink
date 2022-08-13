@@ -69,8 +69,13 @@ export class PostService{
       .subscribe(order =>{
         console.log('from service: ', order)
         this.order = order;
-        this.orderUpdated.next({...this.order})//copy of objext
       })
+  }
+   //get one order
+   getOrderTest(){
+    return this.http.get<{message: string, order: Order }>(
+    'http://localhost:3000/api/order'
+    )
   }
 
   //get all tables

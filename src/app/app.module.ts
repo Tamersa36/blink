@@ -19,6 +19,7 @@ import {MatListModule} from '@angular/material/list'
 import {MatSidenavModule} from '@angular/material/sidenav'
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatChipsModule} from '@angular/material/chips';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 import { AppComponent } from './app.component';
@@ -52,6 +53,7 @@ import { FooterComponent } from './footer/footer/footer.component';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    MatBadgeModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,

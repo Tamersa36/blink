@@ -32,9 +32,9 @@ export class PostCreateComponent implements OnInit {
   // }
 
   onCallWaiter(){
-    this.postService.addOrder(this.tableId,"CallWaiter","CREATED");
+    this.postService.addOrder(this.tableId,"Call Waiter","CREATED");
   }
   onNeedWater(){
-    this.postService.addOrder(this.tableId,"NeedWater","CREATED");
+    this.postService.addOrder(this.tableId,"Need Water","CREATED");
   }
 }
