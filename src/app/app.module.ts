@@ -16,7 +16,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list'
-import{MatSidenavModule} from '@angular/material/sidenav'
+import {MatSidenavModule} from '@angular/material/sidenav'
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 import { AppComponent } from './app.component';
@@ -54,7 +56,9 @@ import { FooterComponent } from './footer/footer/footer.component';
     MatSidenavModule,
     MatListModule,
     MatExpansionModule,
+    MatTabsModule,
     MatIconModule,
+    MatChipsModule,
     MatGridListModule,
     MatDividerModule,
     HttpClientModule
