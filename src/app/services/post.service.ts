@@ -5,6 +5,7 @@ import { HttpClient, HttpParams} from "@angular/common/http";
 
 import { Order } from "../models/Order";
 import { Table } from "../models/Table";
+import { User } from "../models/User"
 
 
 @Injectable({providedIn: 'root'})
@@ -16,6 +17,7 @@ export class PostService{
 
   private order: Order | any;
   private table: Table | any;
+  private user: User | any;
   private tableExists: string | any;
 
   private ordersUpdated = new Subject<Order[]>();
@@ -23,6 +25,7 @@ export class PostService{
 
   private orderUpdated = new Subject<Order>();
   private tableUpdated = new Subject<Table>();
+  private userUpdated = new Subject<User>();
   private tableExistsUpdated = new Subject<string>();
 
   constructor(private http: HttpClient){}
@@ -105,6 +108,21 @@ export class PostService{
         this.tableExistsUpdated.next({...this.tableExists})
       })
   }
+  //check if table exist in DB
+    userAuth(userName:string, password:string){
+    let params = new HttpParams();
+    params = params.append('userName', userName);
+    params = params.append('password', password);
+    this.http.get<{message: string, user: User }>(
+    'http://localhost:3000/api/user',
+    {params: params}
+    )
+      .subscribe(user =>{
+        console.log('from service: ', user)
+        this.user = user;
+        this.userUpdated.next({...this.user})
+      })
+  }
 
 
   getOrderUpdateListener(){
@@ -121,5 +139,8 @@ export class PostService{
   }
   getTableExistsSubUpdateListener(){
     return this.tableExistsUpdated.asObservable();
+  }
+  getUserSubUpdateListener(){
+    return this.userUpdated.asObservable();
   }
 }
