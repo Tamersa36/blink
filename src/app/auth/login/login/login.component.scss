@@ -1,0 +1,25 @@
+mat-card{
+  width: 40%;
+  margin: auto;
+  margin-top: 1rem;
+
+}
+
+p{
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+mat-form-field,
+textarea{
+  width: 100%;
+}
+
+mat-grid-tile {
+  background: lightblue;
+}
+mat-grid-tile-content{
+  border: 5px;
+}

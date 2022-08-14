@@ -30,6 +30,7 @@ import { DashboardComponent } from './dashboard/dashboard/dashboard.component';
 import { TableEntranceComponent } from './table/table-entrance/table-entrance.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer/footer.component';
+import { LoginComponent } from './auth/login/login/login.component';
 
 
 
@@ -42,7 +43,8 @@ import { FooterComponent } from './footer/footer/footer.component';
     DashboardComponent,
     TableEntranceComponent,
     SidebarComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
