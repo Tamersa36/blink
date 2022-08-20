@@ -1,7 +1,7 @@
 
 <mat-divider></mat-divider>
 <mat-card>
-  <p>{{tableId}}</p>
+  <p>Table {{tableId}}</p>
   <mat-grid-list cols="1" rowHeight="5:1">
     <mat-grid-tile>
         <button mat-raised-button color="primary">Call Waiter</button>
@@ -25,7 +25,7 @@
   <br>
   <mat-grid-list cols="1" rowHeight="7:1">
     <mat-grid-tile>
-        <button mat-raised-button color="primary">Leave Table</button>
+        <button (click)="onLeaveTable()" mat-raised-button color="primary">Leave Table</button>
       </mat-grid-tile>
   </mat-grid-list>
 </mat-card>

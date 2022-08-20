@@ -24,7 +24,22 @@
       <app-sidebar></app-sidebar>
     </mat-drawer>
     <mat-drawer-content>
-      <mat-grid-list cols="1" rowHeight="2:1">
+    <mat-card>
+      <mat-card-header>Active Tables</mat-card-header>
+      <mat-grid-list cols="1" rowHeight="6:1">
+        <mat-grid-tile>
+          <div class="ordersContainer" *ngFor="let key of tables">
+            <mat-card>
+              <div><h2>Table {{key.tableId}}</h2></div>
+            </mat-card>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card>
+    <br>
+      <mat-card>
+        <mat-card-header>Orders Queue</mat-card-header>
+      <mat-grid-list cols="1" rowHeight="4:1">
         <mat-grid-tile>
           <div class="ordersContainer" *ngFor="let key of orders; index as i">
             <mat-card>
@@ -37,6 +52,7 @@
           </div>
         </mat-grid-tile>
       </mat-grid-list>
+    </mat-card>
     </mat-drawer-content>
   </mat-drawer-container>
 </div>

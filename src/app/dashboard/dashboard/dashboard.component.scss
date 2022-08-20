@@ -13,11 +13,18 @@ mat-drawer {
 mat-drawer-container {
   height: 100%;
 }
+mat-card-header{
+  font-size: 17px;
+  font-weight: bold;
+  padding-bottom: 7px;
+}
 
 mat-drawer-content {
   padding: 20px;
 }
-
+mat-grid-tile{
+  background-color: #dd930014;
+}
 .ordersContainer{
   padding-left: 15px;
   padding-right: 15px;

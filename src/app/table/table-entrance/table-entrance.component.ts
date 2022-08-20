@@ -40,7 +40,6 @@ export class TableEntranceComponent implements OnInit {
     }
     check(request: any) {
       if(request.table==='true'){
-        console.log("zobi")
         sessionStorage.setItem('tableId', this.tableId);
         console.log(sessionStorage)
         this.router.navigateByUrl('/table');

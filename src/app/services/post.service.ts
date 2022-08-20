@@ -19,6 +19,7 @@ export class PostService{
   private table: Table | any;
   private user: User | any;
   private tableExists: string | any;
+  private tableStatus: string | any;
 
   private ordersUpdated = new Subject<Order[]>();
   private tablesUpdated = new Subject<Table[]>();
@@ -27,6 +28,7 @@ export class PostService{
   private tableUpdated = new Subject<Table>();
   private userUpdated = new Subject<User>();
   private tableExistsUpdated = new Subject<string>();
+  private tableStatusUpdated = new Subject<string>();
 
   constructor(private http: HttpClient){}
 
@@ -81,6 +83,11 @@ export class PostService{
     )
   }
 
+  getOccupiedTables(){
+    return this.http.get<{message: string, table: Table }>(
+    'http://localhost:3000/api/occupiedTables'
+    )
+  }
   //get all tables
   getTables(){
     this.http.get<{message: string, table: Table }>(
@@ -90,6 +97,19 @@ export class PostService{
         console.log('from service: ', tables)
         this.tables = tables;
         this.tablesUpdated.next([...this.tables])
+      })
+  }
+  updateTableStatus(tableId:string){
+    let params = new HttpParams();
+    params = params.append('tableId', tableId);
+    this.http.get<{message: string, table: Table }>(
+    'http://localhost:3000/api/updateTableStatus',
+    {params: params}
+    )
+      .subscribe(table =>{
+        console.log('from service: ', table)
+        this.tableStatus = table;
+        this.tableStatusUpdated.next({...this.tableStatus})
       })
   }
 
@@ -142,5 +162,8 @@ export class PostService{
   }
   getUserSubUpdateListener(){
     return this.userUpdated.asObservable();
+  }
+  getTableStatusUpdateListener(){
+    return this.tableStatusUpdated.asObservable();
   }
 }

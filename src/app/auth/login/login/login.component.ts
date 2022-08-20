@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   onLogin(form: NgForm){
     console.log(form.value)
-    this.postService.userAuth('admin1','admin');
+    this.postService.userAuth('admin','admin');
       this.userSub = this.postService.getUserSubUpdateListener()
       .subscribe((request)=>{
         this.check(request);
