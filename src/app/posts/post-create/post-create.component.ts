@@ -1,7 +1,7 @@
 import { Component, OnInit} from "@angular/core";
-import { NgForm } from "@angular/forms";
 import { PostService } from "src/app/services/post.service";
 import { ShareDataService } from "src/app/services/share-data.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-post-create',
@@ -15,7 +15,7 @@ export class PostCreateComponent implements OnInit {
 
   tableId: string | any;
 
-  constructor(public postService: PostService, private shareData: ShareDataService){
+  constructor(public postService: PostService, private shareData: ShareDataService, private router: Router){
 
   }
   ngOnInit(): void {
@@ -23,18 +23,17 @@ export class PostCreateComponent implements OnInit {
     this.tableId = sessionStorage.getItem('tableId');
     console.log('table id from order: ', this.tableId)
   }
-  // onAddPost(form: NgForm){
-  //   if(form.invalid){
-  //     return;
-  //   }
-  //   this.postService.addPost(form.value.title, form.value.content);
-  //   form.resetForm();
-  // }
 
   onCallWaiter(){
     this.postService.addOrder(this.tableId,"Call Waiter","CREATED");
   }
   onNeedWater(){
     this.postService.addOrder(this.tableId,"Need Water","CREATED");
+  }
+  onLeaveTable(){
+    this.postService.updateTableStatus(this.tableId)
+    sessionStorage.clear();
+    console.log(sessionStorage)
+    this.router.navigateByUrl('');
   }
 }
