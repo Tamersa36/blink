@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
   }
       raw2(req: any){
         if(req.table){
-          this.tables = req.table;
+          this.tables.push(req.table);
         }
         console.log(this.tables);
         // this.order = req.order
