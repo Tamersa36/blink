@@ -27,6 +27,18 @@ router.get('/api/occupiedTables', (req, res, next)=>{
     });
 });
 
+router.get('/api/leaveTable', (req, res, next)=>{
+  const filter = {'status': "EMPTY","admin": true};
+  const update = {'admin': "false"};
+  Table.findOneAndUpdate(filter, update)
+    .then(docs =>{
+      res.status(200).json({
+        message: 'table left!',
+        table: docs
+      });
+    });
+});
+
 //check if table exist in DB
 router.get('/api/table', (req, res, next)=>{
   const filter = { 'tableId': req.query.tableId ,'password': req.query.password, 'status': "EMPTY" };
@@ -42,7 +54,7 @@ router.get('/api/table', (req, res, next)=>{
 
 router.get('/api/updateTableStatus', (req, res, next)=>{
   const filter = { 'tableId': req.query.tableId , 'status': "OCCUPIED", 'admin': true};
-  const update = {'status': "EMPTY", "admin": false};
+  const update = {'status': "EMPTY"};
   Table.findOneAndUpdate(filter,update)
     .then(docs =>{
       res.status(200).json({
