@@ -4,4 +4,5 @@ export interface Table{
   password:string
   status:string
   admin:boolean
+  timeDate:string
 }

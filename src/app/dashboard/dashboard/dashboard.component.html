@@ -31,6 +31,9 @@
           <div class="ordersContainer" *ngFor="let key of tables">
             <mat-card>
               <div><h2>Table {{key.tableId}}</h2></div>
+              <div>active</div>
+              <div>{{key.timeDate}}
+              </div>
             </mat-card>
           </div>
         </mat-grid-tile>

@@ -14,11 +14,13 @@ export class DashboardComponent implements OnInit {
   orders:Order[] = [];
   tables:Table[] = [];
   order: Order | any;
+  timeDate: string | any;
   private ordersSub: Subscription = new Subscription;
 
   constructor(private postService: PostService, private sharedData: ShareDataService) { }
 
   ngOnInit(): void {
+
     this.fetchOccupiedTables()
     setInterval(() => {
       this.fetchOccupiedTables()
@@ -58,8 +60,9 @@ export class DashboardComponent implements OnInit {
   }
       raw2(req: any){
         if(req.table){
+          req.table.timeDate = this.getTimeDate()
           this.tables.push(req.table);
-        }
+         }
         console.log(this.tables);
         // this.order = req.order
         // if(req.table && this.tables.indexOf(table) !== -1){
@@ -71,6 +74,12 @@ export class DashboardComponent implements OnInit {
   onCompleteOrder(i: any){
     this.orders.splice(i,1);
     console.log("compelete",this.orders)
+  }
+
+  getTimeDate(){
+    const dateTime = new Date()
+    return `${dateTime.getHours()}:${dateTime.getUTCMinutes()} ${dateTime.getDate()}/${dateTime.getUTCMonth() + 1 }/${dateTime.getFullYear()}`;
+
   }
 
 }
