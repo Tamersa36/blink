@@ -22,8 +22,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
     this.fetchOccupiedTables()
+    this.checkTableLeft()
+    this.fetchOrders()
     setInterval(() => {
       this.fetchOccupiedTables()
+      this.checkTableLeft()
+      this.fetchOrders()
     }
     , 2000);
     // this.fetchOrders()
@@ -50,6 +54,13 @@ export class DashboardComponent implements OnInit {
         this.raw2(request);
       });
       }
+  checkTableLeft(){
+      this.postService.onLeaveTable()
+      .subscribe((request)=>{
+        console.log(request)
+        this.raw3(request);
+      });
+      }
 
       raw(req: any){
         // this.order = req.order
@@ -62,6 +73,17 @@ export class DashboardComponent implements OnInit {
         if(req.table){
           req.table.timeDate = this.getTimeDate()
           this.tables.push(req.table);
+         }
+        console.log(this.tables);
+        // this.order = req.order
+        // if(req.table && this.tables.indexOf(table) !== -1){
+      // this.tables.push(req.table)
+        // console.log(this.tables);
+  // }
+  }
+      raw3(req: any){
+        if(req.table){
+          this.tables.splice(req.table,1);
          }
         console.log(this.tables);
         // this.order = req.order

@@ -20,6 +20,7 @@ export class PostService{
   private user: User | any;
   private tableExists: string | any;
   private tableStatus: string | any;
+  private leaveTable: string | any;
 
   private ordersUpdated = new Subject<Order[]>();
   private tablesUpdated = new Subject<Table[]>();
@@ -27,6 +28,7 @@ export class PostService{
   private orderUpdated = new Subject<Order>();
   private tableUpdated = new Subject<Table>();
   private userUpdated = new Subject<User>();
+  private leaveTableUpdated = new Subject<Table>();
   private tableExistsUpdated = new Subject<string>();
   private tableStatusUpdated = new Subject<string>();
 
@@ -112,6 +114,11 @@ export class PostService{
         this.tableStatusUpdated.next({...this.tableStatus})
       })
   }
+  onLeaveTable(){
+    return this.http.get<{message: string, table: Table }>(
+    'http://localhost:3000/api/leaveTable'
+    )
+  }
 
   //check if table exist in DB
   getTableCredentials(tableId:string, password:string){
@@ -165,5 +172,8 @@ export class PostService{
   }
   getTableStatusUpdateListener(){
     return this.tableStatusUpdated.asObservable();
+  }
+  getLeaveTableUpdateListener(){
+    return this.leaveTableUpdated.asObservable();
   }
 }
