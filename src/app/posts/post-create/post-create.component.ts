@@ -19,7 +19,6 @@ export class PostCreateComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    // this.tableId = this.shareData.get()
     this.tableId = sessionStorage.getItem('tableId');
     console.log('table id from order: ', this.tableId)
   }

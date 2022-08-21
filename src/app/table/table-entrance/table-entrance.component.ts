@@ -28,7 +28,6 @@ export class TableEntranceComponent implements OnInit {
   tableId: any;
   onEnterTable(){
     this.tableId = this.tableFormControl.value;
-    this.shareData.set(this.tableId);
     console.log(this.tableFormControl.value,this.passFormControl.value);
 
     this.postService.getTableCredentials(this.tableFormControl.value,this.passFormControl.value);
