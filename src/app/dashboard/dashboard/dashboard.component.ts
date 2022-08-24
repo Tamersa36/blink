@@ -20,7 +20,8 @@ export class DashboardComponent implements OnInit {
   constructor(private postService: PostService, private sharedData: ShareDataService) { }
 
   ngOnInit(): void {
-
+    this.orders = this.postService.loadState('orders');
+    this.tables = this.postService.loadState('tables');
     this.fetchOccupiedTables()
     this.checkTableLeft()
     this.fetchOrders()
@@ -67,6 +68,7 @@ export class DashboardComponent implements OnInit {
         if(req.order){
       this.orders.push(req.order)
       console.log(this.orders);
+      this.postService.saveState('orders', this.orders);
   }
   }
       raw2(req: any){
@@ -75,6 +77,7 @@ export class DashboardComponent implements OnInit {
           this.tables.push(req.table);
          }
         console.log(this.tables);
+        this.postService.saveState('tables', this.tables);
         // this.order = req.order
         // if(req.table && this.tables.indexOf(table) !== -1){
       // this.tables.push(req.table)
@@ -86,11 +89,13 @@ export class DashboardComponent implements OnInit {
           this.tables.splice(this.tables.findIndex(t => t.tableId === req.table.tableId),1);
          }
         console.log(this.tables);
+        this.postService.saveState('tables', this.tables);
   }
 
   onCompleteOrder(i: any){
     this.orders.splice(i,1);
     console.log("compelete",this.orders)
+    this.postService.saveState('orders', this.orders);
   }
 
   getTimeDate(){

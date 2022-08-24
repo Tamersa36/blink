@@ -151,7 +151,6 @@ export class PostService{
       })
   }
 
-
   getOrderUpdateListener(){
     return this.ordersUpdated.asObservable();
   }
@@ -175,5 +174,13 @@ export class PostService{
   }
   getLeaveTableUpdateListener(){
     return this.leaveTableUpdated.asObservable();
+  }
+
+  saveState(key:string, value:any){
+    sessionStorage.setItem(`${key}`, JSON.stringify(value));
+  }
+  loadState(key: string){
+    const state = JSON.parse(sessionStorage.getItem(key) || '{}');
+    return state;
   }
 }
