@@ -19,6 +19,8 @@ export class PostCreateComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    if(!this.postService.isTableEntered())
+        this.router.navigateByUrl('');
     this.tableId = sessionStorage.getItem('tableId');
     console.log('table id from order: ', this.tableId)
   }

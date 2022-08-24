@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(private shareData: ShareDataService, private router: Router, private postService: PostService) { }
 
   ngOnInit(): void {
+    if(this.postService.isAdminLoggedIn())
+        this.router.navigateByUrl('/dashboard');
   }
 
   ngOnDestroy(): void {
@@ -35,6 +37,7 @@ export class LoginComponent implements OnInit {
   check(request: any) {
     if(request.user==='true'){
       console.log("zobi")
+      sessionStorage.setItem('admin', 'admin');
       this.router.navigateByUrl('/dashboard');
     }
     else{
