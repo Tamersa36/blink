@@ -29,6 +29,16 @@ export class PostCreateComponent implements OnInit {
   onNeedWater(){
     this.postService.addOrder(this.tableId,"Need Water","CREATED");
   }
+  onReadyToOrder(){
+    this.postService.addOrder(this.tableId,"Ready To Order","CREATED");
+  }
+  onSendMeBill(){
+    this.postService.addOrder(this.tableId,"Send Me Bill","CREATED");
+  }
+  onAskForMenu(){
+      const url = "https://www.olden-menu.online";
+      window.open(url, "_blank");
+  }
   onLeaveTable(){
     this.postService.updateTableStatus(this.tableId)
     sessionStorage.clear();
