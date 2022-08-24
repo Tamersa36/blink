@@ -4,6 +4,7 @@ import { Order } from 'src/app/models/Order';
 import { Subscription } from "rxjs";
 import { Table } from 'src/app/models/Table';
 import { ShareDataService } from 'src/app/services/share-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,9 +18,12 @@ export class DashboardComponent implements OnInit {
   timeDate: string | any;
   private ordersSub: Subscription = new Subscription;
 
-  constructor(private postService: PostService, private sharedData: ShareDataService) { }
+  constructor(private postService: PostService, private sharedData: ShareDataService, private router: Router) { }
 
   ngOnInit(): void {
+    if(!this.postService.isAdminLoggedIn())
+        this.router.navigateByUrl('/login');
+
     this.orders = this.postService.loadState('orders');
     this.tables = this.postService.loadState('tables');
     this.fetchOccupiedTables()

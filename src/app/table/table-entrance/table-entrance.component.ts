@@ -19,6 +19,9 @@ export class TableEntranceComponent implements OnInit {
   constructor(private shareData: ShareDataService, private router: Router, private postService: PostService) { }
 
   ngOnInit(): void {
+    if(this.postService.isTableEntered()){
+      this.router.navigateByUrl('/table');
+    }
   }
   ngOnDestroy(): void {
     this.tableExistsSub.unsubscribe();

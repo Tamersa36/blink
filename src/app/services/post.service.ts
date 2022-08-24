@@ -183,4 +183,18 @@ export class PostService{
     const state = JSON.parse(sessionStorage.getItem(key) || '{}');
     return state;
   }
+
+  isTableEntered() {
+    let table = sessionStorage.getItem('tableId');
+    return !(table === null);
+  }
+
+  isAdminLoggedIn() {
+    let admin = sessionStorage.getItem('admin');
+    return !(admin === null);
+  }
+
+  logOut() {
+    sessionStorage.clear();
+  }
 }
