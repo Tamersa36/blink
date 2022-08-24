@@ -83,14 +83,9 @@ export class DashboardComponent implements OnInit {
   }
       raw3(req: any){
         if(req.table){
-          this.tables.splice(req.table,1);
+          this.tables.splice(this.tables.findIndex(t => t.tableId === req.table.tableId),1);
          }
         console.log(this.tables);
-        // this.order = req.order
-        // if(req.table && this.tables.indexOf(table) !== -1){
-      // this.tables.push(req.table)
-        // console.log(this.tables);
-  // }
   }
 
   onCompleteOrder(i: any){
