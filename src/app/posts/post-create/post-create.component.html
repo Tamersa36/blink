@@ -4,22 +4,22 @@
   <p>Table {{tableId}}</p>
   <mat-grid-list cols="1" rowHeight="5:1">
     <mat-grid-tile>
-        <button mat-raised-button color="primary">Call Waiter</button>
+        <button (click)="onCallWaiter()" mat-raised-button color="primary">Call Waiter</button>
       </mat-grid-tile>
   </mat-grid-list>
   <br>
   <mat-grid-list cols="2" rowHeight="2:1">
     <mat-grid-tile>
-      <button (click)="onCallWaiter()"  mat-raised-button color="primary">Need Water</button>
+      <button (click)="onNeedWater()"  mat-raised-button color="primary">Need Water</button>
     </mat-grid-tile>
     <mat-grid-tile>
-      <button (click)="onNeedWater()" mat-raised-button color="primary">Ask For Menu</button>
+      <button (click)="onAskForMenu()" mat-raised-button color="primary">Ask For Menu</button>
     </mat-grid-tile>
     <mat-grid-tile>
-      <button mat-raised-button color="primary">Ready To Order</button>
+      <button (click)="onReadyToOrder()" mat-raised-button color="primary">Ready To Order</button>
     </mat-grid-tile>
     <mat-grid-tile>
-      <button mat-raised-button color="primary">Send Me Bill</button>
+      <button (click)="onSendMeBill()" mat-raised-button color="primary">Send Me Bill</button>
     </mat-grid-tile>
   </mat-grid-list>
   <br>
