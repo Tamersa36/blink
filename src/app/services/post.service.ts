@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { map } from "rxjs";
-import { HttpClient, HttpParams} from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 import { Order } from "../models/Order";
 import { Table } from "../models/Table";
@@ -138,8 +138,7 @@ export class PostService{
   //check if table exist in DB
     userAuth(userName:string, password:string){
     let params = new HttpParams();
-    params = params.append('userName', userName);
-    params = params.append('password', password);
+    params = params.append('Authorization', btoa(userName + ':' + password),);
     this.http.get<{message: string, user: User }>(
     'http://localhost:3000/api/user',
     {params: params}
@@ -181,7 +180,16 @@ export class PostService{
   }
   loadState(key: string){
     const state = JSON.parse(sessionStorage.getItem(key) || '{}');
-    return state;
+    if(key === 'tables'){
+      let tableState = state as Table;
+      return tableState;
+    }
+
+    if(key === 'orders'){
+      let tableState = state as Order;
+      return tableState;
+    }
+    return state
   }
 
   isTableEntered() {
@@ -195,6 +203,6 @@ export class PostService{
   }
 
   logOut() {
-    sessionStorage.clear();
+    sessionStorage.removeItem('admin');
   }
 }

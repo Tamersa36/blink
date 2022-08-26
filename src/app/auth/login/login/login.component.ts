@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   private userSub: Subscription = new Subscription;
   table: User | any;
   constructor(private shareData: ShareDataService, private router: Router, private postService: PostService) { }
-
+  userCheck = false;
   ngOnInit(): void {
     if(this.postService.isAdminLoggedIn())
         this.router.navigateByUrl('/dashboard');
@@ -27,21 +27,21 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form: NgForm){
-    console.log(form.value)
-    this.postService.userAuth('admin','admin');
+    let formValues = form.value
+    this.postService.userAuth(formValues.username,formValues.password);
       this.userSub = this.postService.getUserSubUpdateListener()
       .subscribe((request)=>{
-        this.check(request);
+        this.check(request, formValues.username);
       });
   }
-  check(request: any) {
+  check(request: any, username:string) {
     if(request.user==='true'){
-      console.log("zobi")
-      sessionStorage.setItem('admin', 'admin');
+      sessionStorage.setItem('admin', username);
       this.router.navigateByUrl('/dashboard');
     }
     else{
       console.log("nono")
+      this.userCheck = true;
     }
 }
 

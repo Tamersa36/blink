@@ -23,4 +23,7 @@
   color="primary"
   type="submit">Login</button>
   </form>
+  <div class="error-msg">
+    <p *ngIf="userCheck===true" class="text-info mat-body-1">Wrong Login Credentials</p>
+  </div>
 </mat-card>
