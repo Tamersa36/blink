@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   tables:Table[] = [];
   order: Order | any;
   timeDate: string | any;
+  interval:any;
   private ordersSub: Subscription = new Subscription;
 
   constructor(private postService: PostService, private sharedData: ShareDataService, private router: Router) { }
@@ -29,7 +30,7 @@ export class DashboardComponent implements OnInit {
     this.fetchOccupiedTables()
     this.checkTableLeft()
     this.fetchOrders()
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.fetchOccupiedTables()
       this.checkTableLeft()
       this.fetchOrders()
@@ -43,6 +44,7 @@ export class DashboardComponent implements OnInit {
   }
   ngOnDestroy(): void {
     this.ordersSub.unsubscribe();
+    clearInterval(this.interval)
   }
 
   fetchOrders(){
