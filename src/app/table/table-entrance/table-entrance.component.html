@@ -1,7 +1,5 @@
-<app-header></app-header>
-<body>
-  <br />
-  <br />
+<div class="main">
+  <app-header></app-header>
   <mat-card>
     <div class="center">
       <div class="enterIcon">
@@ -32,7 +30,7 @@
       <mat-form-field>
         <input
           matInput
-          type="password"
+          type="texts"
           name="password"
           ngModel
           required
@@ -50,12 +48,12 @@
       </div>
     </form>
     <div class="error-msg">
-      <p *ngIf="tableCheck === true" class="text-info mat-body-1">
-        Wrong Login Credentials
+      <p *ngIf="tableCheck === true">
+        Wrong Table Credentials Or Table Occupied
       </p>
     </div>
   </mat-card>
-  <br />
-  <br />
-</body>
-<app-footer></app-footer>
+  <app-footer></app-footer>
+</div>
+<mat-divider></mat-divider>
+<mat-divider></mat-divider>

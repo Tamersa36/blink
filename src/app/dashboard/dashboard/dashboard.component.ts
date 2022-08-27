@@ -27,8 +27,15 @@ export class DashboardComponent implements OnInit {
 
     //main logic
     //saving and fetching dashboard state
-    // this.orders = this.postService.loadState('orders');
-    // this.tables = this.postService.loadState('tables');
+    const ordersState = this.postService.loadState('orders');
+    ordersState.forEach((element: Order) => {
+      this.orders.push(element);
+    });
+
+    const tableState = this.postService.loadState('tables');
+    tableState.forEach((element: Table) => {
+      this.tables.push(element);
+    });
 
     //listening for orders from backend and Database
     //fetching connected tables, fetching tables orders, and listing for if tables left
@@ -39,7 +46,7 @@ export class DashboardComponent implements OnInit {
       this.fetchOccupiedTables();
       this.checkTableLeft();
       this.fetchOrders();
-    }, 500);
+    }, 2000);
   }
 
   ngOnDestroy(): void {

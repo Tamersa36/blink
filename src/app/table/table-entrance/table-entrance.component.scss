@@ -1,23 +1,16 @@
-body{
+
+.main{
   background-color: #dd930014;
+  padding-bottom: 30%;
 }
 mat-card{
-  width: 35%;
-  margin: auto;
-  // margin-top: 15rem;
-  margin-bottom: 10%;
+  margin-top: 40%;
+  margin-left: 10px;
+  margin-right: 10px;
   padding-top: 60px;
-  padding-bottom: 60px;
+  padding-bottom: 30px;
 
 }
-
-p{
-  text-align: center;
-  font-size: 17px;
-  font-weight: bold;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
 mat-form-field,
 textarea{
   width: 100%;
@@ -40,6 +33,7 @@ mat-grid-tile-content{
   padding-right: 50px;
   padding-top: 3px;
   padding-bottom: 3px;
+  margin-top: 15%;
   }
   .enterIcon{
     transform: scale(2.5);
@@ -51,13 +45,16 @@ mat-grid-tile-content{
     font-size: 20px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
+    padding-bottom: 10%;
   }
 }
 .error-msg{
-  padding-top: 10px;
-  color: red;
-  text-align: center;
-  font-size: 17px;
-  font-weight: bold;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  padding-top: 15px;
+  p{
+    color: rgba(255, 0, 0, 0.697);
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
 }

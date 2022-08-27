@@ -1,31 +1,46 @@
-
+<app-header></app-header>
 <mat-divider></mat-divider>
+<br />
 <mat-card>
-  <p>Table {{tableId}}</p>
+  <p>Table {{ tableId }}</p>
   <mat-grid-list cols="1" rowHeight="5:1">
     <mat-grid-tile>
-        <button (click)="onCallWaiter()" mat-raised-button color="primary">Call Waiter</button>
-      </mat-grid-tile>
+      <button (click)="onCallWaiter()" mat-raised-button color="primary">
+        Call Waiter
+      </button>
+    </mat-grid-tile>
   </mat-grid-list>
-  <br>
+  <br />
   <mat-grid-list cols="2" rowHeight="2:1">
     <mat-grid-tile>
-      <button (click)="onNeedWater()"  mat-raised-button color="primary">Need Water</button>
+      <button (click)="onNeedWater()" mat-raised-button color="primary">
+        Need Water
+      </button>
     </mat-grid-tile>
     <mat-grid-tile>
-      <button (click)="onAskForMenu()" mat-raised-button color="primary">Ask For Menu</button>
+      <button (click)="onAskForMenu()" mat-raised-button color="primary">
+        Ask For Menu
+      </button>
     </mat-grid-tile>
     <mat-grid-tile>
-      <button (click)="onReadyToOrder()" mat-raised-button color="primary">Ready To Order</button>
+      <button (click)="onReadyToOrder()" mat-raised-button color="primary">
+        Ready To Order
+      </button>
     </mat-grid-tile>
     <mat-grid-tile>
-      <button (click)="onSendMeBill()" mat-raised-button color="primary">Send Me Bill</button>
+      <button (click)="onSendMeBill()" mat-raised-button color="primary">
+        Send Me Bill
+      </button>
     </mat-grid-tile>
   </mat-grid-list>
-  <br>
+  <br />
   <mat-grid-list cols="1" rowHeight="7:1">
     <mat-grid-tile>
-        <button (click)="onLeaveTable()" mat-raised-button color="primary">Leave Table</button>
-      </mat-grid-tile>
+      <button (click)="onLeaveTable()" mat-raised-button color="primary">
+        Leave Table
+      </button>
+    </mat-grid-tile>
   </mat-grid-list>
 </mat-card>
+<br />
+<app-footer></app-footer>
