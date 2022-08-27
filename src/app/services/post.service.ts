@@ -1,17 +1,14 @@
-import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
-import { map } from "rxjs";
-import { HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+import { map } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
-import { Order } from "../models/Order";
-import { Table } from "../models/Table";
-import { User } from "../models/User"
+import { Order } from '../models/Order';
+import { Table } from '../models/Table';
+import { User } from '../models/User';
 
-
-@Injectable({providedIn: 'root'})
-
-export class PostService{
-
+@Injectable({ providedIn: 'root' })
+export class PostService {
   private orders: Order[] = [];
   private tables: Table[] | any;
 
@@ -32,164 +29,175 @@ export class PostService{
   private tableExistsUpdated = new Subject<string>();
   private tableStatusUpdated = new Subject<string>();
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient) {}
 
-////fetch Apis's////
+  ////fetch Apis's////
 
   //post order
-  addOrder(tableId: string, content: string, status: string){
-    const order: Order={id:'', tableId: tableId, content: content, status: status};
-    this.http.post<{message: string}>('http://localhost:3000/api/orders',order)
-    .subscribe((responseData) => {
-      console.log(responseData.message);
-      this.orders.push(order);
-      this.ordersUpdated.next([...this.orders]);
-    });
+  addOrder(tableId: string, content: string, status: string) {
+    const order: Order = {
+      id: '',
+      tableId: tableId,
+      content: content,
+      status: status,
+      timeDate: '',
+    };
+    this.http
+      .post<{ message: string }>('http://localhost:3000/api/orders', order)
+      .subscribe((responseData) => {
+        console.log(responseData.message);
+        this.orders.push(order);
+        this.ordersUpdated.next([...this.orders]);
+      });
   }
 
-//get orders
-  getOrders(){
-    this.http.get<{message: string, orders: any }>(
-    'http://localhost:3000/api/orders'
-    )
-    .pipe(map((orderData) => {
-      return orderData.orders.map((order: { tableId: any; content: any; status:any; _id: any; })=>{
-        return{
-          tableId: order.tableId,
-          content: order.content,
-          status: order.status,
-          id: order._id
-        };
-      })
-    }))
-    .subscribe(transformedOrders =>{
-      this.orders = transformedOrders;
-      this.ordersUpdated.next([...this.orders])//copy of array
-
-    });
+  //get orders
+  getOrders() {
+    this.http
+      .get<{ message: string; orders: any }>('http://localhost:3000/api/orders')
+      .pipe(
+        map((orderData) => {
+          return orderData.orders.map(
+            (order: { tableId: any; content: any; status: any; _id: any }) => {
+              return {
+                tableId: order.tableId,
+                content: order.content,
+                status: order.status,
+                id: order._id,
+              };
+            }
+          );
+        })
+      )
+      .subscribe((transformedOrders) => {
+        this.orders = transformedOrders;
+        this.ordersUpdated.next([...this.orders]); //copy of array
+      });
   }
   //get one order
-  getOrder(){
-    this.http.get<{message: string, order: Order }>(
-    'http://localhost:3000/api/order'
-    )
-      .subscribe(order =>{
-        console.log('from service: ', order)
+  getOrder() {
+    this.http
+      .get<{ message: string; order: Order }>('http://localhost:3000/api/order')
+      .subscribe((order) => {
+        console.log('from service: ', order);
         this.order = order;
-      })
+      });
   }
-   //get one order
-   getOrderTest(){
-    return this.http.get<{message: string, order: Order }>(
-    'http://localhost:3000/api/order'
-    )
+  //get one order
+  getOrderTest() {
+    return this.http.get<{ message: string; order: Order }>(
+      'http://localhost:3000/api/order'
+    );
   }
 
-  getOccupiedTables(){
-    return this.http.get<{message: string, table: Table }>(
-    'http://localhost:3000/api/occupiedTables'
-    )
+  getOccupiedTables() {
+    return this.http.get<{ message: string; table: Table }>(
+      'http://localhost:3000/api/occupiedTables'
+    );
   }
   //get all tables
-  getTables(){
-    this.http.get<{message: string, table: Table }>(
-    'http://localhost:3000/api/tables'
-    )
-      .subscribe(tables =>{
-        console.log('from service: ', tables)
+  getTables() {
+    this.http
+      .get<{ message: string; table: Table }>(
+        'http://localhost:3000/api/tables'
+      )
+      .subscribe((tables) => {
+        console.log('from service: ', tables);
         this.tables = tables;
-        this.tablesUpdated.next([...this.tables])
-      })
+        this.tablesUpdated.next([...this.tables]);
+      });
   }
-  updateTableStatus(tableId:string){
+  updateTableStatus(tableId: string) {
     let params = new HttpParams();
     params = params.append('tableId', tableId);
-    this.http.get<{message: string, table: Table }>(
-    'http://localhost:3000/api/updateTableStatus',
-    {params: params}
-    )
-      .subscribe(table =>{
-        console.log('from service: ', table)
+    this.http
+      .get<{ message: string; table: Table }>(
+        'http://localhost:3000/api/updateTableStatus',
+        { params: params }
+      )
+      .subscribe((table) => {
+        console.log('from service: ', table);
         this.tableStatus = table;
-        this.tableStatusUpdated.next({...this.tableStatus})
-      })
+        this.tableStatusUpdated.next({ ...this.tableStatus });
+      });
   }
-  onLeaveTable(){
-    return this.http.get<{message: string, table: Table }>(
-    'http://localhost:3000/api/leaveTable'
-    )
+  onLeaveTable() {
+    return this.http.get<{ message: string; table: Table }>(
+      'http://localhost:3000/api/leaveTable'
+    );
   }
 
   //check if table exist in DB
-  getTableCredentials(tableId:string, password:string){
+  getTableCredentials(tableId: string, password: string) {
     let params = new HttpParams();
     params = params.append('tableId', tableId);
     params = params.append('password', password);
-    this.http.get<{message: string, table: Table }>(
-    'http://localhost:3000/api/table',
-    {params: params}
-    )
-      .subscribe(table =>{
-        console.log('from service: ', table)
+    this.http
+      .get<{ message: string; table: Table }>(
+        'http://localhost:3000/api/table',
+        { params: params }
+      )
+      .subscribe((table) => {
+        console.log('from service: ', table);
         this.tableExists = table;
-        this.tableExistsUpdated.next({...this.tableExists})
-      })
+        this.tableExistsUpdated.next({ ...this.tableExists });
+      });
   }
   //check if table exist in DB
-    userAuth(userName:string, password:string){
+  userAuth(userName: string, password: string) {
     let params = new HttpParams();
-    params = params.append('Authorization', btoa(userName + ':' + password),);
-    this.http.get<{message: string, user: User }>(
-    'http://localhost:3000/api/user',
-    {params: params}
-    )
-      .subscribe(user =>{
-        console.log('from service: ', user)
-        this.user = user;
-        this.userUpdated.next({...this.user})
+    params = params.append('Authorization', btoa(userName + ':' + password));
+    this.http
+      .get<{ message: string; user: User }>('http://localhost:3000/api/user', {
+        params: params,
       })
+      .subscribe((user) => {
+        console.log('from service: ', user);
+        this.user = user;
+        this.userUpdated.next({ ...this.user });
+      });
   }
 
-  getOrderUpdateListener(){
+  getOrderUpdateListener() {
     return this.ordersUpdated.asObservable();
   }
-  getOrdUpdateListener(){
+  getOrdUpdateListener() {
     return this.orderUpdated.asObservable();
   }
-  getTablesUpdateListener(){
+  getTablesUpdateListener() {
     return this.tablesUpdated.asObservable();
   }
-  getTableUpdateListener(){
+  getTableUpdateListener() {
     return this.tableUpdated.asObservable();
   }
-  getTableExistsSubUpdateListener(){
+  getTableExistsSubUpdateListener() {
     return this.tableExistsUpdated.asObservable();
   }
-  getUserSubUpdateListener(){
+  getUserSubUpdateListener() {
     return this.userUpdated.asObservable();
   }
-  getTableStatusUpdateListener(){
+  getTableStatusUpdateListener() {
     return this.tableStatusUpdated.asObservable();
   }
-  getLeaveTableUpdateListener(){
+  getLeaveTableUpdateListener() {
     return this.leaveTableUpdated.asObservable();
   }
 
-  saveState(key:string, value:any){
+  saveState(key: string, value: any) {
     sessionStorage.setItem(`${key}`, JSON.stringify(value));
   }
-  loadState(key: string){
+  loadState(key: string) {
     const state = JSON.parse(sessionStorage.getItem(key) || '{}');
-    if(key === 'tables'){
+    if (key === 'tables') {
       let tableState = state as Table;
       return tableState;
     }
 
-    if(key === 'orders'){
+    if (key === 'orders') {
       let tableState = state as Order;
       return tableState;
     }
-    return state
+    return state;
   }
 
   isTableEntered() {

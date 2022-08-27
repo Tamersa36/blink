@@ -30,16 +30,30 @@ mat-grid-tile{
   padding-right: 15px;
   text-align: center;
 
+  .orderCard{
+    padding-top: 40px;
+  }
+  .tableCard{
+    padding-top: 30px;
+  }
+
   .orderContent{
-    font-size: 18px;
-    font-weight: bold;
-    font-family: 'Courier New', Courier, monospace
+    font-size: 16px;
+    color: #DD9200;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding-bottom: 6px;
+
 
   }
   .mat-fab {
     left:60px;
-    top:-35px;
+    top:35px;
     background-color: #DD9200;
+    z-index: 1;
+  }
+
+  .dateTime{
+    font-size: 15px;
   }
 }
 .active{

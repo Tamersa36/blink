@@ -1,10 +1,9 @@
 <mat-nav-list>
   <div class="profile-card">
-      <div class="header">
-        <h3>Admin</h3>
-        <h4>example@email.com</h4>
-      </div>
-      <img src="../../assets/logo.svg" alt="Blink">
+    <div class="header">
+      <h3>Admin Dashboard</h3>
+    </div>
+    <img src="../../assets/logo.svg" alt="Blink" />
   </div>
 
   <!-- <mat-divider></mat-divider> -->
@@ -20,23 +19,27 @@
 
   <mat-divider></mat-divider>
 
-  <h2 matSubheader>Tools</h2>
+  <!-- <h2 matSubheader>Tools</h2>
 
   <a mat-list-item routerLinkActive="list-item-active" routerLink="/upload">
-      <mat-icon>add</mat-icon>
-      Add Table
-  </a>
+    <mat-icon>add</mat-icon>
+    Add Table
+  </a> -->
   <mat-divider></mat-divider>
-  <br>
+  <br />
 
-  <a (click)="logout()" mat-list-item routerLinkActive="list-item-active" routerLink="/login">
+  <a
+    (click)="logout()"
+    mat-list-item
+    routerLinkActive="list-item-active"
+    routerLink="/login"
+  >
     <mat-icon>logout</mat-icon>
     Logout
-</a>
+  </a>
 
   <!-- <a mat-list-item routerLinkActive="list-item-active" routerLink="/contacts">
       <mat-icon>contact_phone</mat-icon>
       Leads
   </a> -->
-
 </mat-nav-list>
