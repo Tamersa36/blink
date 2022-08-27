@@ -1,7 +1,15 @@
+.main{
+  background-color: #dd930014;
+  padding-bottom: 20%;
+}
+
 mat-card{
-  width: 80%;
-  margin: auto;
-  margin-top: 1rem;
+  margin-top: 10%;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+
 
 }
 
@@ -18,8 +26,49 @@ textarea{
 }
 
 mat-grid-tile {
-  background: lightblue;
+  background: #3f51b5;
 }
 mat-grid-tile-content{
   border: 5px;
 }
+
+.callWaiter{
+  font-size: 25px;
+  border-radius: 10px;
+  background: #01AF29;
+}
+.askForMenu{
+  font-size: 16px;
+  border-radius: 5px;
+  background: #D3B90A;
+}
+.readyToOrder{
+  font-size: 16px;
+  border-radius: 5px;
+  background: #8EB62F;
+}
+.needWater{
+  font-size: 16px;
+  border-radius: 5px;
+  background: #0091E4;
+}
+.sendMeBill{
+  font-size: 16px;
+  border-radius: 5px;
+  background: #EA574D;
+}
+
+.leaveTable{
+  font-size: 20px;
+  border-radius: 10px;
+  background: #EC0000;
+}
+
+mat-icon{
+  padding-right: 2%;
+  transform: scale(1.5);
+}
+
+// mat-grid-list{
+//   padding-inline: 5px;
+// }
