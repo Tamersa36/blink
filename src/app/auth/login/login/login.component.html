@@ -1,29 +1,56 @@
-<mat-card>
-  <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
-    <mat-form-field>
-      <input matInput
-      type="text"
-      name="username" ngModel
-      required
-      placeholder="User Name"
-      #userNameInput="ngModel">
-      <mat-error *ngIf="userNameInput.invalid">Please enter a valid username.</mat-error>
-    </mat-form-field>
-  <mat-form-field>
-    <input matInput
-    type="password"
-    name="password" ngModel
-    required
-    placeholder="Password"
-    #passwordInput = "ngModel">
-    <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
-  </mat-form-field>
-  <button
-  mat-raised-button
-  color="primary"
-  type="submit">Login</button>
-  </form>
-  <div class="error-msg">
-    <p *ngIf="userCheck===true" class="text-info mat-body-1">Wrong Login Credentials</p>
-  </div>
-</mat-card>
+<app-header></app-header>
+<body>
+  <br />
+  <br />
+  <mat-card>
+    <div class="center">
+      <div class="personIcon">
+        <mat-icon>person_outline</mat-icon>
+      </div>
+    </div>
+    <div class="center">
+      <div class="text">Login</div>
+    </div>
+    <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          name="username"
+          ngModel
+          required
+          placeholder="User Name"
+          #userNameInput="ngModel"
+        />
+        <mat-error *ngIf="userNameInput.invalid"
+          >Please enter a valid username.</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="password"
+          name="password"
+          ngModel
+          required
+          placeholder="Password"
+          #passwordInput="ngModel"
+        />
+        <mat-error *ngIf="passwordInput.invalid"
+          >Please enter a valid password.</mat-error
+        >
+      </mat-form-field>
+      <div class="center">
+        <button class="primary" mat-raised-button type="submit">Login</button>
+      </div>
+    </form>
+    <div class="error-msg">
+      <p *ngIf="userCheck === true" class="text-info mat-body-1">
+        Wrong Login Credentials
+      </p>
+    </div>
+  </mat-card>
+  <br />
+  <br />
+</body>
+<app-footer></app-footer>

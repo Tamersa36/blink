@@ -1,34 +1,61 @@
-
+<app-header></app-header>
+<body>
+  <br />
+  <br />
   <mat-card>
-<div class="parent">
-  <p>Table Interance</p>
-  <form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Table</mat-label>
-      <input type="text" matInput [formControl]="tableFormControl" placeholder="Ex. 1..">
-      <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="emailFormControl.hasError('required')">
-        Email is <strong>required</strong>
-      </mat-error> -->
-      <br><br>
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Password</mat-label>
-      <input type="text" matInput [formControl]="passFormControl" placeholder="Pass..">
-      <!-- <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-        Please enter a valid email address
-      </mat-error>
-      <mat-error *ngIf="emailFormControl.hasError('required')">
-        Email is <strong>required</strong>
-      </mat-error> -->
-      <br><br>
-    </mat-form-field>
-  </form>
-  <button (click)="onEnterTable()" mat-raised-button color="primary">Enter Table</button>
-</div>
-<div class="error-msg">
-  <p *ngIf="tableCheck===true" class="text-info mat-body-1">Wrong Table Credentials Or Table Occupied</p>
-</div>
-</mat-card>
+    <div class="center">
+      <div class="enterIcon">
+        <mat-icon>login</mat-icon>
+      </div>
+    </div>
+    <div class="center">
+      <div class="text">Table Entrance</div>
+    </div>
+    <form
+      (submit)="onEnterTable(tableEntranceForm)"
+      #tableEntranceForm="ngForm"
+    >
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          name="tableId"
+          ngModel
+          required
+          placeholder="Table ID"
+          #tableIdInput="ngModel"
+        />
+        <mat-error *ngIf="tableIdInput.invalid"
+          >Please enter a valid Table ID.</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          type="password"
+          name="password"
+          ngModel
+          required
+          placeholder="Password"
+          #passwordInput="ngModel"
+        />
+        <mat-error *ngIf="passwordInput.invalid"
+          >Please enter a valid password.</mat-error
+        >
+      </mat-form-field>
+      <div class="center">
+        <button class="primary" mat-raised-button type="submit">
+          Enter Table
+        </button>
+      </div>
+    </form>
+    <div class="error-msg">
+      <p *ngIf="tableCheck === true" class="text-info mat-body-1">
+        Wrong Login Credentials
+      </p>
+    </div>
+  </mat-card>
+  <br />
+  <br />
+</body>
+<app-footer></app-footer>

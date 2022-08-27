@@ -1,7 +1,13 @@
+body{
+  background-color: #dd930014;
+}
 mat-card{
-  width: 40%;
+  width: 35%;
   margin: auto;
-  margin-top: 1rem;
+  // margin-top: 15rem;
+  margin-bottom: 10%;
+  padding-top: 60px;
+  padding-bottom: 60px;
 
 }
 
@@ -23,7 +29,30 @@ mat-grid-tile {
 mat-grid-tile-content{
   border: 5px;
 }
+.center{
+  justify-content: center;
+  display: flex;
+  .primary{
+  background-color: #DD9200;
+  color: white;
+  font-weight: bold;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  }
+  .personIcon{
+    transform: scale(2.5);
+    padding-bottom: 10px;
+    color: #DD9200;
+  }
 
+  .text{
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+  }
+}
 .error-msg{
   padding-top: 10px;
   color: red;
