@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const ordersRoutes = require("./routes/orders");
 const tablesRoutes = require("./routes/tables");
 const usersRoutes = require("./routes/users");
+const defaultRoutes = require("./routes/default");
 
 
 const app = express();
@@ -32,5 +33,6 @@ next();
 app.use(ordersRoutes);
 app.use(tablesRoutes);
 app.use(usersRoutes);
+app.use(defaultRoutes);
 
 module.exports = app;
