@@ -7,32 +7,25 @@ import { LoginComponent } from './auth/login/login/login.component';
 
 const routes: Routes = [
   {
-  path: 'dashboard',
-  component: DashboardComponent,
-
-},
-{
-  path: 'table',
-  component: PostCreateComponent,
-
-}
-,
-{
-  path: '',
-  component: TableEntranceComponent,
-
-}
-,
-{
-  path: 'login',
-  component: LoginComponent,
-
-}
+    path: 'dashboard',
+    component: DashboardComponent,
+  },
+  {
+    path: 'table',
+    component: PostCreateComponent,
+  },
+  {
+    path: '',
+    component: TableEntranceComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
 ];
 
-
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

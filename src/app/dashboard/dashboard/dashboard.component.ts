@@ -25,18 +25,18 @@ export class DashboardComponent implements OnInit {
     if (!this.postService.isAdminLoggedIn())
       this.router.navigateByUrl('/login');
 
-    //main logic
     //saving and fetching dashboard state
-    const ordersState = this.postService.loadState('orders');
-    ordersState.forEach((element: Order) => {
-      this.orders.push(element);
-    });
+    // const ordersState = this.postService.loadState('orders');
+    // ordersState.forEach((element: Order) => {
+    //   this.orders.push(element);
+    // });
 
-    const tableState = this.postService.loadState('tables');
-    tableState.forEach((element: Table) => {
-      this.tables.push(element);
-    });
+    // const tableState = this.postService.loadState('tables');
+    // tableState.forEach((element: Table) => {
+    //   this.tables.push(element);
+    // });
 
+    //main logic
     //listening for orders from backend and Database
     //fetching connected tables, fetching tables orders, and listing for if tables left
     this.fetchOccupiedTables();

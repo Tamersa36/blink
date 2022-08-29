@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Order } from '../models/Order';
 import { Table } from '../models/Table';
 import { User } from '../models/User';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
@@ -43,7 +44,10 @@ export class PostService {
       timeDate: '',
     };
     this.http
-      .post<{ message: string }>('http://localhost:3000/api/orders', order)
+      .post<{ message: string }>(
+        environment.API_END_POINT + '/api/orders',
+        order
+      )
       .subscribe((responseData) => {
         console.log(responseData.message);
         this.orders.push(order);
@@ -54,7 +58,9 @@ export class PostService {
   //get orders
   getOrders() {
     this.http
-      .get<{ message: string; orders: any }>('http://localhost:3000/api/orders')
+      .get<{ message: string; orders: any }>(
+        environment.API_END_POINT + '/api/orders'
+      )
       .pipe(
         map((orderData) => {
           return orderData.orders.map(
@@ -77,7 +83,9 @@ export class PostService {
   //get one order
   getOrder() {
     this.http
-      .get<{ message: string; order: Order }>('http://localhost:3000/api/order')
+      .get<{ message: string; order: Order }>(
+        environment.API_END_POINT + '/api/order'
+      )
       .subscribe((order) => {
         console.log('from service: ', order);
         this.order = order;
@@ -86,20 +94,20 @@ export class PostService {
   //get one order
   getOrderTest() {
     return this.http.get<{ message: string; order: Order }>(
-      'http://localhost:3000/api/order'
+      environment.API_END_POINT + '/api/order'
     );
   }
 
   getOccupiedTables() {
     return this.http.get<{ message: string; table: Table }>(
-      'http://localhost:3000/api/occupiedTables'
+      environment.API_END_POINT + '/api/occupiedTables'
     );
   }
   //get all tables
   getTables() {
     this.http
       .get<{ message: string; table: Table }>(
-        'http://localhost:3000/api/tables'
+        environment.API_END_POINT + '/api/tables'
       )
       .subscribe((tables) => {
         console.log('from service: ', tables);
@@ -112,7 +120,7 @@ export class PostService {
     params = params.append('tableId', tableId);
     this.http
       .get<{ message: string; table: Table }>(
-        'http://localhost:3000/api/updateTableStatus',
+        environment.API_END_POINT + '/api/updateTableStatus',
         { params: params }
       )
       .subscribe((table) => {
@@ -123,7 +131,7 @@ export class PostService {
   }
   onLeaveTable() {
     return this.http.get<{ message: string; table: Table }>(
-      'http://localhost:3000/api/leaveTable'
+      environment.API_END_POINT + '/api/leaveTable'
     );
   }
 
@@ -134,7 +142,7 @@ export class PostService {
     params = params.append('password', password);
     this.http
       .get<{ message: string; table: Table }>(
-        'http://localhost:3000/api/table',
+        environment.API_END_POINT + '/api/table',
         { params: params }
       )
       .subscribe((table) => {
@@ -148,9 +156,12 @@ export class PostService {
     let params = new HttpParams();
     params = params.append('Authorization', btoa(userName + ':' + password));
     this.http
-      .get<{ message: string; user: User }>('http://localhost:3000/api/user', {
-        params: params,
-      })
+      .get<{ message: string; user: User }>(
+        environment.API_END_POINT + '/api/user',
+        {
+          params: params,
+        }
+      )
       .subscribe((user) => {
         console.log('from service: ', user);
         this.user = user;
