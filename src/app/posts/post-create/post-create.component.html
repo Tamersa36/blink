@@ -3,62 +3,89 @@
   <mat-divider></mat-divider>
   <br />
   <mat-card>
-    <p>Table {{ tableId }}</p>
+    <div class="tableNumber">Table {{ tableId }}</div>
     <mat-grid-list cols="1" rowHeight="4:1">
       <mat-grid-tile (click)="onCallWaiter()" class="callWaiter">
         <button class="callWaiter" mat-flat-button color="primary">
-          <mat-icon>room_service</mat-icon>
+          <mat-icon class="inline">room_service</mat-icon>
           Call Waiter
         </button>
       </mat-grid-tile>
     </mat-grid-list>
-    <br />
+    <div class="spacer"></div>
+    <div class="spacer"></div>
     <mat-grid-list cols="2" rowHeight="1:1">
       <mat-grid-tile class="needWater" (click)="onNeedWater()">
-        <button class="needWater" mat-flat-button color="primary">
-          <mat-icon>local_drink</mat-icon>
-          Need Water
-        </button>
+        <div class="container">
+          <section class="header">
+            <mat-icon>local_drink</mat-icon>
+          </section>
+          <section class="header-start">
+            <button class="needWater" mat-flat-button color="primary">
+              Need Water
+            </button>
+          </section>
+        </div>
       </mat-grid-tile>
       <mat-grid-tile class="askForMenu">
-        <button
-          class="askForMenu"
-          (click)="onAskForMenu()"
-          mat-flat-button
-          color="primary"
-        >
-          <mat-icon>import_contacts</mat-icon>
-          Ask For Menu
-        </button>
+        <div class="container">
+          <section class="header">
+            <mat-icon>import_contacts</mat-icon>
+          </section>
+          <section class="header-start">
+            <button
+              class="askForMenu"
+              (click)="onAskForMenu()"
+              mat-flat-button
+              color="primary"
+            >
+              Ask For Menu
+            </button>
+          </section>
+        </div>
       </mat-grid-tile>
+      <div class="spacer"></div>
       <mat-grid-tile class="readyToOrder">
-        <button
-          class="readyToOrder"
-          (click)="onReadyToOrder()"
-          mat-flat-button
-          color="primary"
-        >
-          <mat-icon>border_color</mat-icon>
-          Ready To Order
-        </button>
+        <div class="container">
+          <section class="header">
+            <mat-icon>border_color</mat-icon>
+          </section>
+          <section class="header-start">
+            <button
+              class="readyToOrder"
+              (click)="onReadyToOrder()"
+              mat-flat-button
+              color="primary"
+            >
+              Ready To Order
+            </button>
+          </section>
+        </div>
       </mat-grid-tile>
       <mat-grid-tile class="sendMeBill">
-        <button
-          class="sendMeBill"
-          (click)="onSendMeBill()"
-          mat-flat-button
-          color="primary"
-        >
-          <mat-icon>attach_money</mat-icon>
-          Send Me Bill
-        </button>
+        <div class="container">
+          <section class="header">
+            <mat-icon>attach_money</mat-icon>
+          </section>
+          <section class="header-start">
+            <button
+              class="sendMeBill"
+              (click)="onSendMeBill()"
+              mat-flat-button
+              color="primary"
+            >
+              Send Me Bill
+            </button>
+          </section>
+        </div>
       </mat-grid-tile>
     </mat-grid-list>
-    <br />
+    <div class="spacer"></div>
+    <div class="spacer"></div>
     <mat-grid-list cols="1" rowHeight="6:1">
       <mat-grid-tile (click)="onLeaveTable()" class="leaveTable">
         <button class="leaveTable" mat-flat-button color="primary">
-          <mat-icon>cancel</mat-icon>
+          <mat-icon class="inlineCancel">cancel</mat-icon>
           Leave Table
         </button>
       </mat-grid-tile>
