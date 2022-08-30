@@ -4,11 +4,11 @@
 }
 
 mat-card{
-  margin-top: 10%;
+  margin-top: 2%;
   margin-left: 10px;
   margin-right: 10px;
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 45px;
+  padding-bottom: 80px;
 }
 
 p{
@@ -23,50 +23,86 @@ textarea{
   width: 100%;
 }
 
-mat-grid-tile {
-  background: #3f51b5;
-}
-mat-grid-tile-content{
-  border: 5px;
-}
-
 .callWaiter{
-  font-size: 25px;
+  padding-left: 3px;
+  font-weight: bold;
+  padding-right: 2px;
+  font-size: 22px;
   border-radius: 10px;
   background: #01AF29;
 }
 .askForMenu{
-  font-size: 16px;
+  font-weight: bold;
+  margin-left: 3px;
+  font-size: 18px;
   border-radius: 5px;
   background: #D3B90A;
 }
 .readyToOrder{
-  font-size: 16px;
+  font-weight: bold;
+  margin-right: 3px;
+  font-size: 18px;
   border-radius: 5px;
   background: #8EB62F;
 }
 .needWater{
-  font-size: 16px;
+  margin-right: 3px;
+  font-weight: bold;
+  font-size: 18px;
   border-radius: 5px;
   background: #0091E4;
+  padding-top: 5px;
 }
 .sendMeBill{
-  font-size: 16px;
+  margin-left: 3px;
+  font-weight: bold;
+  font-size: 18px;
   border-radius: 5px;
   background: #EA574D;
 }
 
 .leaveTable{
+  font-weight: bold;
+  padding-left: 3px;
+  padding-right: 2px;
   font-size: 20px;
   border-radius: 10px;
   background: #EC0000;
 }
 
 mat-icon{
-  padding-right: 2%;
-  transform: scale(1.5);
+  transform: scale(1.8);
 }
 
-// mat-grid-list{
-//   padding-inline: 5px;
-// }
+.spacer{
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.verticalSpace{
+  padding-inline: 5px;
+}
+
+.tableNumber{
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-bottom: 15px;
+
+}
+.header{
+  padding-top: 20px;
+  text-align: center;
+  color: white;
+  transform: scale(1.4);
+  padding-bottom: 10px;
+}
+.inline{
+  padding-inline: 10px;
+}
+
+.inlineCancel{
+  padding-inline: 10px;
+  transform: scale(1.6);
+}
