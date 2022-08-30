@@ -27,53 +27,38 @@
           </section>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile class="askForMenu">
+      <mat-grid-tile (click)="onAskForMenu()" class="askForMenu">
         <div class="container">
           <section class="header">
             <mat-icon>import_contacts</mat-icon>
           </section>
           <section class="header-start">
-            <button
-              class="askForMenu"
-              (click)="onAskForMenu()"
-              mat-flat-button
-              color="primary"
-            >
+            <button class="askForMenu" mat-flat-button color="primary">
               Ask For Menu
             </button>
           </section>
         </div>
       </mat-grid-tile>
       <div class="spacer"></div>
-      <mat-grid-tile class="readyToOrder">
+      <mat-grid-tile (click)="onReadyToOrder()" class="readyToOrder">
         <div class="container">
           <section class="header">
             <mat-icon>border_color</mat-icon>
           </section>
           <section class="header-start">
-            <button
-              class="readyToOrder"
-              (click)="onReadyToOrder()"
-              mat-flat-button
-              color="primary"
-            >
+            <button class="readyToOrder" mat-flat-button color="primary">
               Ready To Order
             </button>
           </section>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile class="sendMeBill">
+      <mat-grid-tile (click)="onSendMeBill()" class="sendMeBill">
         <div class="container">
           <section class="header">
             <mat-icon>attach_money</mat-icon>
           </section>
           <section class="header-start">
-            <button
-              class="sendMeBill"
-              (click)="onSendMeBill()"
-              mat-flat-button
-              color="primary"
-            >
+            <button class="sendMeBill" mat-flat-button color="primary">
               Send Me Bill
             </button>
           </section>
