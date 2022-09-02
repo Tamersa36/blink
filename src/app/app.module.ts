@@ -20,6 +20,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppComponent } from './app.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
@@ -29,6 +30,8 @@ import { TableEntranceComponent } from './table/table-entrance/table-entrance.co
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer/footer.component';
 import { LoginComponent } from './auth/login/login/login.component';
+import { AddTableComponent } from './add-table/add-table/add-table.component';
+import { ShowDeleteComponent } from './add-table/show-delete/show-delete.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { LoginComponent } from './auth/login/login/login.component';
     SidebarComponent,
     FooterComponent,
     LoginComponent,
+    AddTableComponent,
+    ShowDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,7 @@ import { LoginComponent } from './auth/login/login/login.component';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
+    MatSlideToggleModule,
     MatBadgeModule,
     MatToolbarModule,
     MatSidenavModule,

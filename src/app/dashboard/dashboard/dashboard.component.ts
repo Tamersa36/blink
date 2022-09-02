@@ -16,6 +16,9 @@ export class DashboardComponent implements OnInit {
   order: Order | any;
   timeDate: string | any;
   interval: any;
+  isChecked = true;
+  tableSound = '../../assets/table.wav';
+  orderSound = '../../assets/order.wav';
   private ordersSub: Subscription = new Subscription();
 
   constructor(private postService: PostService, private router: Router) {}
@@ -25,27 +28,25 @@ export class DashboardComponent implements OnInit {
     if (!this.postService.isAdminLoggedIn())
       this.router.navigateByUrl('/login');
 
-    //saving and fetching dashboard state
-    // const ordersState = this.postService.loadState('orders');
-    // if (ordersState) {
-    //   ordersState.forEach((element: Order) => {
-    //     this.orders.push(element);
-    //   });
-    // }
-
-    // const tableState = this.postService.loadState('tables');
-    // if (tableState) {
-    //   tableState.forEach((element: Table) => {
-    //     this.tables.push(element);
-    //   });
-    // }
-
     //main logic
     //listening for orders from backend and Database
     //fetching connected tables, fetching tables orders, and listing for if tables left
+    this.startProcesses();
+    this.loadState();
+  }
+
+  ngOnDestroy(): void {
+    this.ordersSub.unsubscribe();
+    clearInterval(this.interval);
+  }
+
+  startProcesses() {
     this.fetchOccupiedTables();
     this.checkTableLeft();
     this.fetchOrders();
+    this.startLoop();
+  }
+  startLoop() {
     this.interval = setInterval(() => {
       this.fetchOccupiedTables();
       this.checkTableLeft();
@@ -53,9 +54,25 @@ export class DashboardComponent implements OnInit {
     }, 2000);
   }
 
-  ngOnDestroy(): void {
-    this.ordersSub.unsubscribe();
+  killProcesses() {
     clearInterval(this.interval);
+  }
+
+  loadState() {
+    //saving and fetching dashboard state
+    const ordersState = this.postService.loadState('orders');
+    if (ordersState) {
+      ordersState.forEach((element: Order) => {
+        this.orders.push(element);
+      });
+    }
+
+    const tableState = this.postService.loadState('tables');
+    if (tableState) {
+      tableState.forEach((element: Table) => {
+        this.tables.push(element);
+      });
+    }
   }
 
   fetchOrders() {
@@ -69,6 +86,7 @@ export class DashboardComponent implements OnInit {
     if (req.order) {
       req.order.timeDate = this.getTimeDate();
       this.orders.push(req.order);
+      this.playSound(this.orderSound);
     }
     console.log(this.orders);
     this.postService.saveState('orders', this.orders);
@@ -85,6 +103,7 @@ export class DashboardComponent implements OnInit {
     if (req.table) {
       req.table.timeDate = this.getTimeDate();
       this.tables.push(req.table);
+      this.playSound(this.tableSound);
     }
     console.log(this.tables);
     this.postService.saveState('tables', this.tables);
@@ -114,10 +133,23 @@ export class DashboardComponent implements OnInit {
     this.postService.saveState('orders', this.orders);
   }
 
+  onChange(checked: any) {
+    console.log(checked);
+    if (!checked) this.killProcesses();
+    else {
+      this.startLoop();
+    }
+  }
+
   getTimeDate() {
     const dateTime = new Date();
     return `${dateTime.getHours()}:${dateTime.getUTCMinutes()} ${dateTime.getDate()}/${
       dateTime.getUTCMonth() + 1
     }/${dateTime.getFullYear()}`;
+  }
+
+  playSound(url: string) {
+    const audio = new Audio(url);
+    audio.play();
   }
 }
