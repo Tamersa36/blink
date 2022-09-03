@@ -32,6 +32,15 @@ export class PostService {
 
   constructor(private http: HttpClient) {}
 
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': 'true',
+      'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+      'Access-Control-Allow-Headers':
+        'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
+    }),
+  };
   ////fetch Apis's////
 
   //post order
@@ -198,7 +207,8 @@ export class PostService {
     sessionStorage.setItem(`${key}`, JSON.stringify(value));
   }
   loadState(key: string) {
-    const state = JSON.parse(sessionStorage.getItem(key) || '{}');
+    const state = JSON.parse(sessionStorage.getItem(key) || '[]');
+    console.log(state);
     if (key === 'tables') {
       let tableState = state as Table;
       return tableState;
