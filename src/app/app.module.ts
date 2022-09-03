@@ -20,7 +20,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppComponent } from './app.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
@@ -32,6 +34,7 @@ import { FooterComponent } from './footer/footer/footer.component';
 import { LoginComponent } from './auth/login/login/login.component';
 import { AddTableComponent } from './add-table/add-table/add-table.component';
 import { ShowDeleteComponent } from './add-table/show-delete/show-delete.component';
+import { OrderComponent } from './posts/order/order.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,7 @@ import { ShowDeleteComponent } from './add-table/show-delete/show-delete.compone
     LoginComponent,
     AddTableComponent,
     ShowDeleteComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,9 +64,11 @@ import { ShowDeleteComponent } from './add-table/show-delete/show-delete.compone
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    MatCheckboxModule,
     MatExpansionModule,
     MatTabsModule,
     MatIconModule,
+    MatDialogModule,
     MatChipsModule,
     MatGridListModule,
     MatDividerModule,
