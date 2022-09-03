@@ -40,14 +40,19 @@
         </div>
       </mat-grid-tile>
       <div class="spacer"></div>
-      <mat-grid-tile (click)="onReadyToOrder()" class="readyToOrder">
+      <mat-grid-tile class="readyToOrder">
         <div class="container">
           <section class="header">
             <mat-icon>border_color</mat-icon>
           </section>
           <section class="header-start">
-            <button class="readyToOrder" mat-flat-button color="primary">
-              Ready To Order
+            <button
+              class="readyToOrder"
+              (click)="openDialog()"
+              mat-flat-button
+              color="primary"
+            >
+              Self Ordering
             </button>
           </section>
         </div>
