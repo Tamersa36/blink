@@ -33,6 +33,7 @@ import { FooterComponent } from './footer/footer/footer.component';
 import { LoginComponent } from './auth/login/login/login.component';
 import { ShowDeleteComponent } from './add-table/show-delete/show-delete.component';
 import { OrderComponent } from './posts/order/order.component';
+import { PopupComponent } from './posts/popup/popup.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { OrderComponent } from './posts/order/order.component';
     LoginComponent,
     ShowDeleteComponent,
     OrderComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
