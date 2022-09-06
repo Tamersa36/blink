@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class ShowDeleteComponent implements OnInit {
   tables: any = [];
-  displayedColumns: string[] = ['tableId', 'password', 'edit', 'delete'];
+  displayedColumns: string[] = ['tableId', 'password', 'delete'];
   dataSource: any;
   constructor(private postService: PostService) {}
 
