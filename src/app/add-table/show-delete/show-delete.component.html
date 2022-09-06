@@ -1,40 +1,146 @@
-<h1>Users</h1>
-<a routerLink="add" class="btn btn-sm btn-success mb-2">Add User</a>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th style="width: 30%">Name</th>
-      <th style="width: 30%">Email</th>
-      <th style="width: 30%">Role</th>
-      <th style="width: 10%"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users">
-      <td>{{ user.title }} {{ user.firstName }} {{ user.lastName }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.role }}</td>
-      <td style="white-space: nowrap">
-        <a routerLink="edit/{{ user.id }}" class="btn btn-sm btn-primary mr-1"
-          >Edit</a
-        >
-        <button
-          (click)="deleteUser(user.id)"
-          class="btn btn-sm btn-danger btn-delete-user"
-          [disabled]="user.isDeleting"
-        >
-          <span
-            *ngIf="user.isDeleting"
-            class="spinner-border spinner-border-sm"
-          ></span>
-          <span *ngIf="!user.isDeleting">Delete</span>
-        </button>
-      </td>
-    </tr>
-    <tr *ngIf="!users">
-      <td colspan="4" class="text-center">
-        <span class="spinner-border spinner-border-lg align-center"></span>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<app-header></app-header>
+<div>
+  <mat-drawer-container class="dashboard">
+    <mat-drawer mode="side" opened>
+      <app-sidebar></app-sidebar>
+      <br />
+    </mat-drawer>
+    <br />
+    <mat-drawer-content>
+      <mat-card>
+        <mat-card-header>Add Tables</mat-card-header>
+        <mat-grid-list cols="1" rowHeight="6:1">
+          <mat-grid-tile>
+            <mat-card>
+              <form (submit)="onAddTable(AddTableForm)" #AddTableForm="ngForm">
+                <table class="example-full-width" cellspacing="0">
+                  <tr>
+                    <td>
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="fill"
+                      >
+                        <mat-label>Table ID</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          name="tableId"
+                          ngModel
+                          required
+                          placeholder="Table ID"
+                          #tableIdInput="ngModel"
+                        />
+                        <mat-error *ngIf="tableIdInput.invalid"
+                          >Please enter a valid Table ID.</mat-error
+                        >
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="fill"
+                      >
+                        <mat-label>Password</mat-label>
+                        <input
+                          matInput
+                          type="texts"
+                          name="password"
+                          ngModel
+                          required
+                          placeholder="Password"
+                          #passwordInput="ngModel"
+                        />
+                        <mat-error *ngIf="passwordInput.invalid"
+                          >Please enter a valid password.</mat-error
+                        >
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <button mat-raised-button color="primary" type="submit">
+                        <mat-icon>add</mat-icon>Add Table
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </form>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card>
+      <br />
+      <mat-card>
+        <mat-card-header>Edit Tables</mat-card-header>
+        <mat-grid-list cols="1" rowHeight="4:1">
+          <mat-grid-tile>
+            <div
+              fxLayout="row"
+              fxLayoutAlign="space-between center"
+              fxLayoutGap="20px"
+            >
+              <div fxFlex="100">
+                <div class="mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="tableId">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Table ID
+                      </th>
+                      <td mat-cell *matCellDef="let element">
+                        {{ element.tableId }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="password">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Password
+                      </th>
+                      <td mat-cell *matCellDef="let element">
+                        {{ element.password }}
+                      </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="edit">
+                      <th mat-header-cell *matHeaderCellDef></th>
+                      <td mat-cell *matCellDef="let element">
+                        <button
+                          mat-raised-button
+                          color="primary"
+                          (click)="
+                            onEditTable(element.tableId, element.password)
+                          "
+                        >
+                          <mat-icon>edit</mat-icon>
+                          Edit
+                        </button>
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="delete">
+                      <th mat-header-cell *matHeaderCellDef></th>
+                      <td mat-cell *matCellDef="let element">
+                        <button
+                          mat-raised-button
+                          color="primary"
+                          (click)="onDeleteTable(element.tableId)"
+                        >
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: displayedColumns"
+                    ></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card>
+      <br />
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

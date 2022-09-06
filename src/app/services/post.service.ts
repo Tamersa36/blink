@@ -113,16 +113,15 @@ export class PostService {
     );
   }
   //get all tables
-  getTables() {
-    this.http
-      .get<{ message: string; table: Table }>(
-        environment.API_END_POINT + '/api/tables'
-      )
-      .subscribe((tables) => {
-        console.log('from service: ', tables);
-        this.tables = tables;
-        this.tablesUpdated.next([...this.tables]);
-      });
+  getAllTables() {
+    return this.http.get<{ message: string; tables: Table }>(
+      environment.API_END_POINT + '/api/tables'
+    );
+    // .subscribe((tables) => {
+    //   console.log('from service: ', tables);
+    //   this.tables = tables;
+    //   this.tablesUpdated.next([...this.tables]);
+    // });
   }
   updateTableStatus(tableId: string) {
     let params = new HttpParams();
@@ -176,6 +175,41 @@ export class PostService {
         this.user = user;
         this.userUpdated.next({ ...this.user });
       });
+  }
+  //add table
+  addTable(tableId: string, password: string) {
+    const table: Table = {
+      id: '',
+      tableId: tableId,
+      status: '',
+      password: password,
+      admin: false,
+      timeDate: '',
+    };
+    return this.http.post<{ message: string }>(
+      environment.API_END_POINT + '/api/addTable',
+      table
+    );
+  }
+  deleteTable(tableId: string) {
+    let params = new HttpParams();
+    params = params.append('tableId', tableId);
+    return this.http.get<{ message: string }>(
+      environment.API_END_POINT + '/api/deleteTable',
+      {
+        params: params,
+      }
+    );
+  }
+  editTable(tableId: string, password: string) {
+    const table: any = {
+      tableId: tableId,
+      password: password,
+    };
+    return this.http.post<{ message: string }>(
+      environment.API_END_POINT + '/api/editTable',
+      table
+    );
   }
 
   getOrderUpdateListener() {
