@@ -50,6 +50,7 @@ export class OrderComponent implements OnInit {
         .addOrder(this.tableId, regexRes, 'CREATED')
         .subscribe((responseData) => {
           console.log(responseData.message);
+          this.dialogRef.close();
         });
     }
   }

@@ -3,6 +3,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Router } from '@angular/router';
 import { OrderComponent } from '../order/order.component';
 import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from '../popup/popup.component';
 
 @Component({
   selector: 'app-post-create',
@@ -37,12 +38,23 @@ export class PostCreateComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+  onPopup(): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '250px',
+      height: '270px',
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('The dialog was closed');
+    });
+  }
 
   onCallWaiter() {
     this.postService
       .addOrder(this.tableId, 'Call Waiter', 'CREATED')
       .subscribe((responseData) => {
         console.log(responseData.message);
+        this.onPopup();
       });
   }
   onNeedWater() {
@@ -50,6 +62,7 @@ export class PostCreateComponent implements OnInit {
       .addOrder(this.tableId, 'Need Water', 'CREATED')
       .subscribe((responseData) => {
         console.log(responseData.message);
+        this.onPopup();
       });
   }
   onSendMeBill() {
@@ -57,6 +70,7 @@ export class PostCreateComponent implements OnInit {
       .addOrder(this.tableId, 'Send Me Bill', 'CREATED')
       .subscribe((responseData) => {
         console.log(responseData.message);
+        this.onPopup();
       });
   }
   onAskForMenu() {
