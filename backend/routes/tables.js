@@ -14,6 +14,8 @@ router.get("/api/tables", (req, res, next) => {
   });
 });
 
+//admin fetch
+//check if table exist in DB with status OCCUPIED and admin false (admin fetch)
 router.get("/api/occupiedTables", (req, res, next) => {
   const filter = { status: "OCCUPIED", admin: false };
   const update = { admin: true };
@@ -25,6 +27,8 @@ router.get("/api/occupiedTables", (req, res, next) => {
   });
 });
 
+//admin fetch
+//check if table exist in DB with status EMPTY and admin true and update it to false
 router.get("/api/leaveTable", (req, res, next) => {
   const filter = { status: "EMPTY", admin: true };
   const update = { admin: "false" };
@@ -36,7 +40,8 @@ router.get("/api/leaveTable", (req, res, next) => {
   });
 });
 
-//check if table exist in DB
+//client fetch
+//check if table exist in DB with status EMPTY and update it
 router.get("/api/table", (req, res, next) => {
   const filter = {
     tableId: req.query.tableId,
@@ -52,6 +57,8 @@ router.get("/api/table", (req, res, next) => {
   });
 });
 
+//client fetch
+//check if table exist in DB with status OCCUPIED and exist in admin dashboard (admin true) and update it
 router.get("/api/updateTableStatus", (req, res, next) => {
   const filter = {
     tableId: req.query.tableId,
@@ -67,6 +74,7 @@ router.get("/api/updateTableStatus", (req, res, next) => {
   });
 });
 
+//CRUD operations on table
 router.post("/api/addTable", (req, res, next) => {
   const table = new Table({
     tableId: req.body.tableId,

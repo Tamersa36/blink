@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchOrders() {
-    this.postService.getOrderTest().subscribe((request) => {
+    this.postService.getOrder().subscribe((request) => {
       console.log(request);
       this.handleOrder(request);
     });

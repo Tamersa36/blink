@@ -39,22 +39,36 @@ export class PostCreateComponent implements OnInit {
   }
 
   onCallWaiter() {
-    this.postService.addOrder(this.tableId, 'Call Waiter', 'CREATED');
+    this.postService
+      .addOrder(this.tableId, 'Call Waiter', 'CREATED')
+      .subscribe((responseData) => {
+        console.log(responseData.message);
+      });
   }
   onNeedWater() {
-    this.postService.addOrder(this.tableId, 'Need Water', 'CREATED');
+    this.postService
+      .addOrder(this.tableId, 'Need Water', 'CREATED')
+      .subscribe((responseData) => {
+        console.log(responseData.message);
+      });
   }
   onSendMeBill() {
-    this.postService.addOrder(this.tableId, 'Send Me Bill', 'CREATED');
+    this.postService
+      .addOrder(this.tableId, 'Send Me Bill', 'CREATED')
+      .subscribe((responseData) => {
+        console.log(responseData.message);
+      });
   }
   onAskForMenu() {
     const url = 'https://www.olden-menu.online';
     window.open(url, '_blank');
   }
   onLeaveTable() {
-    this.postService.updateTableStatus(this.tableId);
-    sessionStorage.clear();
-    console.log(sessionStorage);
-    this.router.navigateByUrl('');
+    this.postService.updateTableStatus(this.tableId).subscribe((res) => {
+      console.log(res);
+      sessionStorage.clear();
+      console.log(sessionStorage);
+      this.router.navigateByUrl('');
+    });
   }
 }

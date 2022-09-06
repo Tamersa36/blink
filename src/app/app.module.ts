@@ -5,8 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ShareDataService } from './services/share-data.service';
-
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -74,7 +72,7 @@ import { OrderComponent } from './posts/order/order.component';
     MatDividerModule,
     HttpClientModule,
   ],
-  providers: [ShareDataService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

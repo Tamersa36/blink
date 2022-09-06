@@ -46,7 +46,11 @@ export class OrderComponent implements OnInit {
       regexRes = regexRes.replace(/"/g, '');
       regexRes = regexRes.replace(/,/g, ' | ');
       console.log(regexRes);
-      this.postService.addOrder(this.tableId, regexRes, 'CREATED');
+      this.postService
+        .addOrder(this.tableId, regexRes, 'CREATED')
+        .subscribe((responseData) => {
+          console.log(responseData.message);
+        });
     }
   }
 }
