@@ -33,7 +33,6 @@ import { TableEntranceComponent } from './table/table-entrance/table-entrance.co
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer/footer.component';
 import { LoginComponent } from './auth/login/login/login.component';
-import { AddTableComponent } from './add-table/add-table/add-table.component';
 import { ShowDeleteComponent } from './add-table/show-delete/show-delete.component';
 import { OrderComponent } from './posts/order/order.component';
 
@@ -47,7 +46,6 @@ import { OrderComponent } from './posts/order/order.component';
     SidebarComponent,
     FooterComponent,
     LoginComponent,
-    AddTableComponent,
     ShowDeleteComponent,
     OrderComponent,
   ],
