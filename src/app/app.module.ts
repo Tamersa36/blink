@@ -5,8 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ShareDataService } from './services/share-data.service';
-
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +21,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { PostCreateComponent } from './posts/post-create/post-create.component';
@@ -32,7 +31,6 @@ import { TableEntranceComponent } from './table/table-entrance/table-entrance.co
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FooterComponent } from './footer/footer/footer.component';
 import { LoginComponent } from './auth/login/login/login.component';
-import { AddTableComponent } from './add-table/add-table/add-table.component';
 import { ShowDeleteComponent } from './add-table/show-delete/show-delete.component';
 import { OrderComponent } from './posts/order/order.component';
 
@@ -46,7 +44,6 @@ import { OrderComponent } from './posts/order/order.component';
     SidebarComponent,
     FooterComponent,
     LoginComponent,
-    AddTableComponent,
     ShowDeleteComponent,
     OrderComponent,
   ],
@@ -67,6 +64,7 @@ import { OrderComponent } from './posts/order/order.component';
     MatCheckboxModule,
     MatExpansionModule,
     MatTabsModule,
+    MatTableModule,
     MatIconModule,
     MatDialogModule,
     MatChipsModule,
@@ -74,7 +72,7 @@ import { OrderComponent } from './posts/order/order.component';
     MatDividerModule,
     HttpClientModule,
   ],
-  providers: [ShareDataService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

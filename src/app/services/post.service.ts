@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
 import { map } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Order } from '../models/Order';
 import { Table } from '../models/Table';
@@ -10,37 +9,8 @@ import { environment } from 'src/environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
-  private orders: Order[] = [];
-  private tables: Table[] | any;
-
-  private order: Order | any;
-  private table: Table | any;
-  private user: User | any;
-  private tableExists: string | any;
-  private tableStatus: string | any;
-  private leaveTable: string | any;
-
-  private ordersUpdated = new Subject<Order[]>();
-  private tablesUpdated = new Subject<Table[]>();
-
-  private orderUpdated = new Subject<Order>();
-  private tableUpdated = new Subject<Table>();
-  private userUpdated = new Subject<User>();
-  private leaveTableUpdated = new Subject<Table>();
-  private tableExistsUpdated = new Subject<string>();
-  private tableStatusUpdated = new Subject<string>();
-
   constructor(private http: HttpClient) {}
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': 'true',
-      'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
-      'Access-Control-Allow-Headers':
-        'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers',
-    }),
-  };
   ////fetch Apis's////
 
   //post order
@@ -52,19 +22,13 @@ export class PostService {
       status: status,
       timeDate: '',
     };
-    this.http
-      .post<{ message: string }>(
-        environment.API_END_POINT + '/api/orders',
-        order
-      )
-      .subscribe((responseData) => {
-        console.log(responseData.message);
-        this.orders.push(order);
-        this.ordersUpdated.next([...this.orders]);
-      });
+    return this.http.post<{ message: string }>(
+      environment.API_END_POINT + '/api/orders',
+      order
+    );
   }
 
-  //get orders
+  //get all orders for testing
   getOrders() {
     this.http
       .get<{ message: string; orders: any }>(
@@ -83,61 +47,39 @@ export class PostService {
             }
           );
         })
-      )
-      .subscribe((transformedOrders) => {
-        this.orders = transformedOrders;
-        this.ordersUpdated.next([...this.orders]); //copy of array
-      });
+      );
   }
-  //get one order
+
+  //get one order where status created
   getOrder() {
-    this.http
-      .get<{ message: string; order: Order }>(
-        environment.API_END_POINT + '/api/order'
-      )
-      .subscribe((order) => {
-        console.log('from service: ', order);
-        this.order = order;
-      });
-  }
-  //get one order
-  getOrderTest() {
     return this.http.get<{ message: string; order: Order }>(
       environment.API_END_POINT + '/api/order'
     );
   }
 
+  //check if table entered the system and add it to dashboard
   getOccupiedTables() {
     return this.http.get<{ message: string; table: Table }>(
       environment.API_END_POINT + '/api/occupiedTables'
     );
   }
   //get all tables
-  getTables() {
-    this.http
-      .get<{ message: string; table: Table }>(
-        environment.API_END_POINT + '/api/tables'
-      )
-      .subscribe((tables) => {
-        console.log('from service: ', tables);
-        this.tables = tables;
-        this.tablesUpdated.next([...this.tables]);
-      });
+  getAllTables() {
+    return this.http.get<{ message: string; tables: Table }>(
+      environment.API_END_POINT + '/api/tables'
+    );
   }
+  //when user leave update table status from OCCUPIED to EMPTY
   updateTableStatus(tableId: string) {
     let params = new HttpParams();
     params = params.append('tableId', tableId);
-    this.http
-      .get<{ message: string; table: Table }>(
-        environment.API_END_POINT + '/api/updateTableStatus',
-        { params: params }
-      )
-      .subscribe((table) => {
-        console.log('from service: ', table);
-        this.tableStatus = table;
-        this.tableStatusUpdated.next({ ...this.tableStatus });
-      });
+    return this.http.get<{ message: string; table: Table }>(
+      environment.API_END_POINT + '/api/updateTableStatus',
+      { params: params }
+    );
   }
+
+  //after table left update remove the table from dashboad panel by updating admin field in db from true to false
   onLeaveTable() {
     return this.http.get<{ message: string; table: Table }>(
       environment.API_END_POINT + '/api/leaveTable'
@@ -149,60 +91,60 @@ export class PostService {
     let params = new HttpParams();
     params = params.append('tableId', tableId);
     params = params.append('password', password);
-    this.http
-      .get<{ message: string; table: Table }>(
-        environment.API_END_POINT + '/api/table',
-        { params: params }
-      )
-      .subscribe((table) => {
-        console.log('from service: ', table);
-        this.tableExists = table;
-        this.tableExistsUpdated.next({ ...this.tableExists });
-      });
+    return this.http.get<{ message: string; table: Table }>(
+      environment.API_END_POINT + '/api/table',
+      { params: params }
+    );
   }
   //check if table exist in DB
   userAuth(userName: string, password: string) {
     let params = new HttpParams();
     params = params.append('Authorization', btoa(userName + ':' + password));
-    this.http
-      .get<{ message: string; user: User }>(
-        environment.API_END_POINT + '/api/user',
-        {
-          params: params,
-        }
-      )
-      .subscribe((user) => {
-        console.log('from service: ', user);
-        this.user = user;
-        this.userUpdated.next({ ...this.user });
-      });
+    return this.http.get<{ message: string; user: User }>(
+      environment.API_END_POINT + '/api/user',
+      {
+        params: params,
+      }
+    );
   }
 
-  getOrderUpdateListener() {
-    return this.ordersUpdated.asObservable();
+  //CRUD Tables
+  addTable(tableId: string, password: string) {
+    const table: Table = {
+      id: '',
+      tableId: tableId,
+      status: '',
+      password: password,
+      admin: false,
+      timeDate: '',
+    };
+    return this.http.post<{ message: string }>(
+      environment.API_END_POINT + '/api/addTable',
+      table
+    );
   }
-  getOrdUpdateListener() {
-    return this.orderUpdated.asObservable();
+  deleteTable(tableId: string) {
+    let params = new HttpParams();
+    params = params.append('tableId', tableId);
+    return this.http.get<{ message: string }>(
+      environment.API_END_POINT + '/api/deleteTable',
+      {
+        params: params,
+      }
+    );
   }
-  getTablesUpdateListener() {
-    return this.tablesUpdated.asObservable();
-  }
-  getTableUpdateListener() {
-    return this.tableUpdated.asObservable();
-  }
-  getTableExistsSubUpdateListener() {
-    return this.tableExistsUpdated.asObservable();
-  }
-  getUserSubUpdateListener() {
-    return this.userUpdated.asObservable();
-  }
-  getTableStatusUpdateListener() {
-    return this.tableStatusUpdated.asObservable();
-  }
-  getLeaveTableUpdateListener() {
-    return this.leaveTableUpdated.asObservable();
+  editTable(tableId: string, password: string) {
+    const table: any = {
+      tableId: tableId,
+      password: password,
+    };
+    return this.http.post<{ message: string }>(
+      environment.API_END_POINT + '/api/editTable',
+      table
+    );
   }
 
+  //saving and loading app state
   saveState(key: string, value: any) {
     sessionStorage.setItem(`${key}`, JSON.stringify(value));
   }

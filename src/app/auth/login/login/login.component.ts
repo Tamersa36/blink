@@ -5,44 +5,40 @@ import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/User';
 import { PostService } from 'src/app/services/post.service';
 
-import { ShareDataService } from 'src/app/services/share-data.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  private userSub: Subscription = new Subscription;
+  private userSub: Subscription = new Subscription();
   table: User | any;
-  constructor(private shareData: ShareDataService, private router: Router, private postService: PostService) { }
+  constructor(private router: Router, private postService: PostService) {}
   userCheck = false;
   ngOnInit(): void {
-    if(this.postService.isAdminLoggedIn())
-        this.router.navigateByUrl('/dashboard');
+    if (this.postService.isAdminLoggedIn())
+      this.router.navigateByUrl('/dashboard');
   }
 
   ngOnDestroy(): void {
     this.userSub.unsubscribe();
   }
 
-  onLogin(form: NgForm){
-    let formValues = form.value
-    this.postService.userAuth(formValues.username,formValues.password);
-      this.userSub = this.postService.getUserSubUpdateListener()
-      .subscribe((request)=>{
+  onLogin(form: NgForm) {
+    let formValues = form.value;
+    this.postService
+      .userAuth(formValues.username, formValues.password)
+      .subscribe((request) => {
         this.check(request, formValues.username);
       });
   }
-  check(request: any, username:string) {
-    if(request.user==='true'){
+  check(request: any, username: string) {
+    if (request.user === 'true') {
       sessionStorage.setItem('admin', username);
       this.router.navigateByUrl('/dashboard');
-    }
-    else{
-      console.log("nono")
+    } else {
+      console.log('nono');
       this.userCheck = true;
     }
-}
-
+  }
 }

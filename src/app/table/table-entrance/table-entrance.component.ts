@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, NgForm, Validators } from '@angular/forms';
-import { ShareDataService } from 'src/app/services/share-data.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Table } from 'src/app/models/Table';
@@ -16,11 +15,7 @@ export class TableEntranceComponent implements OnInit {
   table: Table | any;
   tableCheck = false;
 
-  constructor(
-    private shareData: ShareDataService,
-    private router: Router,
-    private postService: PostService
-  ) {}
+  constructor(private router: Router, private postService: PostService) {}
 
   ngOnInit(): void {
     if (this.postService.isTableEntered()) {
@@ -35,9 +30,8 @@ export class TableEntranceComponent implements OnInit {
     let values = form.value;
     console.log(values);
     this.tableId = values.tableId;
-    this.postService.getTableCredentials(values.tableId, values.password);
-    this.tableExistsSub = this.postService
-      .getTableExistsSubUpdateListener()
+    this.postService
+      .getTableCredentials(values.tableId, values.password)
       .subscribe((request) => {
         this.check(request);
       });
