@@ -80,17 +80,10 @@ router.post("/api/addTable", (req, res, next) => {
     tableId: req.body.tableId,
     password: req.body.password,
   });
-  const filter = { tableId: req.body.tableId };
-  const tableExist = Table.findOne(filter);
-  if (tableExist) return res.send({ message: "Table Exists" });
-  try {
-    table.save();
-    res.status(201).json({
-      message: "table added successfully!",
-    });
-  } catch (error) {
-    return res.json({ message: "Error!" });
-  }
+  table.save();
+  res.status(201).json({
+    message: "table added successfully!",
+  });
 });
 
 router.get("/api/deleteTable", (req, res, next) => {
