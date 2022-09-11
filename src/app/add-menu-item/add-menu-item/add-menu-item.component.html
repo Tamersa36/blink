@@ -1,0 +1,123 @@
+<app-header></app-header>
+<div>
+  <mat-drawer-container class="dashboard">
+    <mat-drawer mode="side" opened>
+      <app-sidebar></app-sidebar>
+      <br />
+    </mat-drawer>
+    <br />
+    <mat-drawer-content>
+      <mat-card>
+        <mat-card-header>Add Menu Items</mat-card-header>
+        <mat-grid-list cols="1" rowHeight="6:1">
+          <mat-grid-tile>
+            <mat-card>
+              <form (submit)="onAddTable(AddMenuItemForm)" #AddMenuItemForm="ngForm">
+                <table class="example-full-width" cellspacing="0">
+                  <tr>
+                    <td>
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="fill"
+                      >
+                        <mat-label>Item</mat-label>
+                        <input
+                          matInput
+                          type="text"
+                          name="item"
+                          ngModel
+                          required
+                          placeholder="Item"
+                          #menuInput="ngModel"
+                        />
+                        <mat-error *ngIf="menuInput.invalid"
+                          >Please enter a valid Table ID.</mat-error
+                        >
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <button
+                        mat-raised-button
+                        class="primary"
+                        color="primary"
+                        type="submit"
+                      >
+                        <mat-icon>add</mat-icon>Add Item
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </form>
+            </mat-card>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card>
+      <br />
+      <mat-card>
+        <mat-card-header>Show / Delete Menu Item</mat-card-header>
+        <mat-grid-list cols="1" rowHeight="4:1">
+          <mat-grid-tile>
+            <div
+              fxLayout="row"
+              fxLayoutAlign="space-between center"
+              fxLayoutGap="20px"
+            >
+              <div fxFlex="100">
+                <div class="mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="menu">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Item
+                      </th>
+                      <td mat-cell *matCellDef="let element">
+                        {{ element.item }}
+                      </td>
+                    </ng-container>
+
+                    <!-- <ng-container matColumnDef="edit">
+                      <th mat-header-cell *matHeaderCellDef></th>
+                      <td mat-cell *matCellDef="let element">
+                        <button
+                          mat-raised-button
+                          color="primary"
+                          (click)="
+                            onEditTable(element.tableId, element.password)
+                          "
+                        >
+                          <mat-icon>edit</mat-icon>
+                          Edit
+                        </button>
+                      </td>
+                    </ng-container> -->
+                    <ng-container matColumnDef="delete">
+                      <th mat-header-cell *matHeaderCellDef></th>
+                      <td mat-cell *matCellDef="let element">
+                        <button
+                          mat-raised-button
+                          class="primary"
+                          color="primary"
+                          (click)="onDeleteTable(element.item)"
+                        >
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr
+                      mat-row
+                      *matRowDef="let row; columns: displayedColumns"
+                    ></tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card>
+      <br />
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { OrderComponent } from '../order/order.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
+import { FeedbackComponent } from '../feedback/feedback/feedback.component';
 
 @Component({
   selector: 'app-post-create',
@@ -48,6 +49,17 @@ export class PostCreateComponent implements OnInit {
       console.log('The dialog was closed');
     });
   }
+  onFeedBack(): void {
+    const dialogRef = this.dialog.open(FeedbackComponent, {
+      width: '300px',
+      height: '450px',
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      console.log('The dialog was closed');
+      this.router.navigateByUrl('');
+    });
+  }
 
   onCallWaiter() {
     this.postService
@@ -82,7 +94,7 @@ export class PostCreateComponent implements OnInit {
       console.log(res);
       sessionStorage.clear();
       console.log(sessionStorage);
-      this.router.navigateByUrl('');
     });
+    this.onFeedBack()
   }
 }

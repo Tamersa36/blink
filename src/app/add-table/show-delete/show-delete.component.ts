@@ -41,6 +41,7 @@ export class ShowDeleteComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this.getAllTables();
+        form.reset();
       });
   }
 
