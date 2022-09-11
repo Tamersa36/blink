@@ -6,6 +6,7 @@ import { Order } from '../models/Order';
 import { Table } from '../models/Table';
 import { User } from '../models/User';
 import { environment } from 'src/environments/environment.prod';
+import { Menu } from '../models/Menu';
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
@@ -83,20 +84,20 @@ export class PostService {
   onLeaveTable() {
     return this.http.get<{ message: string; table: Table }>(
       environment.API_END_POINT + '/api/leaveTable'
-    );
-  }
+      );
+    }
 
-  //check if table exist in DB
-  getTableCredentials(tableId: string, password: string) {
-    let params = new HttpParams();
+    //check if table exist in DB
+    getTableCredentials(tableId: string, password: string) {
+      let params = new HttpParams();
     params = params.append('tableId', tableId);
     params = params.append('password', password);
     return this.http.get<{ message: string; table: Table }>(
       environment.API_END_POINT + '/api/table',
       { params: params }
-    );
-  }
-  //check if table exist in DB
+      );
+    }
+    //check if table exist in DB
   userAuth(userName: string, password: string) {
     let params = new HttpParams();
     params = params.append('Authorization', btoa(userName + ':' + password));
@@ -105,10 +106,37 @@ export class PostService {
       {
         params: params,
       }
+      );
+    }
+
+    //get all tables
+    getAllMenuItems() {
+      return this.http.get<{ message: string; menu: Menu }>(
+        environment.API_END_POINT + '/api/menuItems'
+      );
+    }
+       //CRUD Tables
+  addItem(item: string) {
+    const menu: Menu = {
+      id: '',
+      item: item
+    };
+    return this.http.post<{ message: string }>(
+      environment.API_END_POINT + '/api/addMenuItem',
+      menu
     );
   }
-
-  //CRUD Tables
+  deleteItem(item: string) {
+    let params = new HttpParams();
+    params = params.append('item', item);
+    return this.http.get<{ message: string }>(
+      environment.API_END_POINT + '/api/deleteMenuItem',
+      {
+        params: params,
+      }
+    );
+  }
+    //CRUD Tables
   addTable(tableId: string, password: string) {
     const table: Table = {
       id: '',

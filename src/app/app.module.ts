@@ -34,6 +34,8 @@ import { LoginComponent } from './auth/login/login/login.component';
 import { ShowDeleteComponent } from './add-table/show-delete/show-delete.component';
 import { OrderComponent } from './posts/order/order.component';
 import { PopupComponent } from './posts/popup/popup.component';
+import { FeedbackComponent } from './posts/feedback/feedback/feedback.component';
+import { AddMenuItemComponent } from './add-menu-item/add-menu-item/add-menu-item.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { PopupComponent } from './posts/popup/popup.component';
     ShowDeleteComponent,
     OrderComponent,
     PopupComponent,
+    FeedbackComponent,
+    AddMenuItemComponent,
   ],
   imports: [
     BrowserModule,

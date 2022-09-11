@@ -5,6 +5,7 @@ import { PostCreateComponent } from './posts/post-create/post-create.component';
 import { TableEntranceComponent } from './table/table-entrance/table-entrance.component';
 import { LoginComponent } from './auth/login/login/login.component';
 import { ShowDeleteComponent } from './add-table/show-delete/show-delete.component';
+import { AddMenuItemComponent } from './add-menu-item/add-menu-item/add-menu-item.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'addTable',
     component: ShowDeleteComponent,
+  },
+  {
+    path: 'addMenuItem',
+    component: AddMenuItemComponent,
   },
 ];
 

@@ -6,6 +6,7 @@ const ordersRoutes = require("./routes/orders");
 const tablesRoutes = require("./routes/tables");
 const usersRoutes = require("./routes/users");
 const defaultRoutes = require("./routes/default");
+const menuRoutes = require("./routes/menu");
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 app.use(ordersRoutes);
 app.use(tablesRoutes);
 app.use(usersRoutes);
+app.use(menuRoutes);
 app.use(defaultRoutes);
 
 module.exports = app;
