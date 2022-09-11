@@ -1,16 +1,11 @@
 <app-header></app-header>
 <h1 mat-dialog-title>Self Ordering Menu</h1>
+
 <div mat-dialog-content>
-  <section class="example-section" [formGroup]="order">
-    <h4>Select your order:</h4>
-    <p><mat-checkbox formControlName="salad">Salad</mat-checkbox></p>
-    <p>
-      <mat-checkbox formControlName="starter">Starter</mat-checkbox>
-    </p>
-    <p><mat-checkbox formControlName="mainCourse">Main Course</mat-checkbox></p>
-    <p><mat-checkbox formControlName="desert">Desert</mat-checkbox></p>
-    <p><mat-checkbox formControlName="drink">Drink</mat-checkbox></p>
-  </section>
+  <h3>Select your order: <mat-icon>edit</mat-icon></h3>
+  <div class="selfOrdering"  *ngFor="let menuItem of items">
+    <mat-checkbox (change)="onCheckBoxChange(menuItem.item,$event.checked)">{{menuItem.item}}</mat-checkbox>
+  </div>
   <!-- <section class="example-section" [formGroup]="order">
     <h4>You chose:</h4>
     {{ order.value | json }}

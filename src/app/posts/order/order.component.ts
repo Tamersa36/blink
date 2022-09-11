@@ -9,7 +9,8 @@ import { PostService } from 'src/app/services/post.service';
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent implements OnInit {
-  animal: string | any;
+  items:any
+  pickedItems:any = []
   name: string | any;
   tableId: string | any;
   constructor(
@@ -19,29 +20,35 @@ export class OrderComponent implements OnInit {
     private postService: PostService
   ) {}
 
-  order = this._formBuilder.group({
-    salad: false,
-    starter: false,
-    mainCourse: false,
-    desert: false,
-    drink: false,
-  });
-
   ngOnInit(): void {
     this.tableId = sessionStorage.getItem('tableId');
+    this.postService.getAllMenuItems()
+    .subscribe(res =>{
+      console.log(res)
+      this.items = res.menu
+    })
   }
 
   public closeMe() {
     this.dialogRef.close();
   }
+  onCheckBoxChange(item: any, isChecked: boolean) {
+    console.log(item,isChecked)
+    if (isChecked) {
+      this.pickedItems.push(item);
+      console.log(this.pickedItems)
+    } else {
+      this.pickedItems.splice(
+        this.pickedItems.findIndex((i: any) => i === item),
+        1
+      );
+      console.log(this.pickedItems)
+      }
+  }
 
   onSelfOrdering() {
-    const res: string[] = [];
-    Object.keys(this.order.value).forEach((key) => {
-      if (this.order.value[key] === true) res.push(key);
-    });
-    if (res.length) {
-      let regexRes = JSON.stringify(res);
+    if (this.pickedItems.length) {
+      let regexRes = JSON.stringify(this.pickedItems);
       regexRes = regexRes.replace(/[\[\]']+/g, '');
       regexRes = regexRes.replace(/"/g, '');
       regexRes = regexRes.replace(/,/g, ' | ');
