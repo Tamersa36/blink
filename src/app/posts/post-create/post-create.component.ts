@@ -5,6 +5,7 @@ import { OrderComponent } from '../order/order.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
 import { FeedbackComponent } from '../feedback/feedback/feedback.component';
+import { io } from 'socket.io-client';
 
 @Component({
   selector: 'app-post-create',
@@ -17,6 +18,11 @@ export class PostCreateComponent implements OnInit {
 
   tableId: string | any;
 
+  socket: any;
+  json: any;
+  messages: string[] = [];
+  messageInput: string = '';
+
   constructor(
     public postService: PostService,
     private router: Router,
@@ -27,6 +33,21 @@ export class PostCreateComponent implements OnInit {
     if (!this.postService.isTableEntered()) this.router.navigateByUrl('');
     this.tableId = sessionStorage.getItem('tableId');
     console.log('table id from order: ', this.tableId);
+
+    this.socket = io('ws://localhost:3000');
+    this.socket.on('message', (text: string) => {
+      console.log('Received message:', text);
+    });
+  }
+  sendMessage() {
+    this.json = {
+      tableId: this.tableId,
+      content: 'send me bill',
+      timeDate: '21:45 4/1/2024'
+    };
+    const jsonString = JSON.stringify(this.json);
+    this.socket.emit('order', jsonString);
+    this.onPopup();
   }
 
   openDialog(): void {
@@ -95,6 +116,6 @@ export class PostCreateComponent implements OnInit {
       sessionStorage.clear();
       console.log(sessionStorage);
     });
-    this.onFeedBack()
+    this.onFeedBack();
   }
 }

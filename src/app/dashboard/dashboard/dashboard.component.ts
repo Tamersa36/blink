@@ -4,6 +4,7 @@ import { Order } from 'src/app/models/Order';
 import { Subscription } from 'rxjs';
 import { Table } from 'src/app/models/Table';
 import { Router } from '@angular/router';
+import { io } from 'socket.io-client';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,12 @@ export class DashboardComponent implements OnInit {
   isChecked = true;
   tableSound = '../../assets/table.wav';
   orderSound = '../../assets/order.wav';
+
+  socket: any;
+  messages: string[] = [];
+  messageInput: string = '';
+  jsonObject:any
+
   private ordersSub: Subscription = new Subscription();
 
   constructor(private postService: PostService, private router: Router) {}
@@ -31,6 +38,12 @@ export class DashboardComponent implements OnInit {
     //main logic
     //listening for orders from backend and Database
     //fetching connected tables, fetching tables orders, and listing for if tables left
+    this.socket = io('ws://localhost:3000');
+    this.socket.on('order', (text: string) => {
+      console.log('Received order:', text);
+      this.jsonObject = JSON.parse(text);
+      this.handleOrder2(this.jsonObject)
+    });
     this.startProcesses();
     this.loadState();
   }
@@ -88,6 +101,12 @@ export class DashboardComponent implements OnInit {
       this.orders.push(req.order);
       this.playSound(this.orderSound);
     }
+    console.log(this.orders);
+    this.postService.saveState('orders', this.orders);
+  }
+  handleOrder2(req: any) {
+      this.orders.push(req);
+      this.playSound(this.orderSound);
     console.log(this.orders);
     this.postService.saveState('orders', this.orders);
   }
