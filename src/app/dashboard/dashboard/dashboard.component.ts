@@ -4,7 +4,7 @@ import { Order } from 'src/app/models/Order';
 import { Subscription } from 'rxjs';
 import { Table } from 'src/app/models/Table';
 import { Router } from '@angular/router';
-import { io } from 'socket.io-client';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,14 +21,18 @@ export class DashboardComponent implements OnInit {
   tableSound = '../../assets/table.wav';
   orderSound = '../../assets/order.wav';
 
-  socket: any;
   messages: string[] = [];
   messageInput: string = '';
-  jsonObject:any
+  jsonObject: any;
 
   private ordersSub: Subscription = new Subscription();
+  private messageSubscription: Subscription = new Subscription();
 
-  constructor(private postService: PostService, private router: Router) {}
+  constructor(
+    private postService: PostService,
+    private router: Router,
+    private socketService: SocketService
+  ) {}
 
   ngOnInit(): void {
     //login guard
@@ -38,19 +42,34 @@ export class DashboardComponent implements OnInit {
     //main logic
     //listening for orders from backend and Database
     //fetching connected tables, fetching tables orders, and listing for if tables left
-    this.socket = io('ws://localhost:3000');
-    this.socket.on('order', (text: string) => {
-      console.log('Received order:', text);
-      this.jsonObject = JSON.parse(text);
-      this.handleOrder2(this.jsonObject)
-    });
-    this.startProcesses();
+
+    this.messageSubscription = this.socketService
+      .onMessage('order')
+      .subscribe((order: Order) => {
+        console.log('Received order:', {order});
+        this.handleOrder2(order);
+      });
+    this.messageSubscription = this.socketService
+      .onMessage('table')
+      .subscribe((text: string) => {
+        console.log('table entered:', text);
+        this.jsonObject = JSON.parse(text);
+        this.handleOccupiedTable2(this.jsonObject);
+      });
+    // this.startProcesses();
     this.loadState();
   }
 
   ngOnDestroy(): void {
+    // Clean up subscriptions when the component is destroyed
     this.ordersSub.unsubscribe();
+    this.messageSubscription.unsubscribe();
     clearInterval(this.interval);
+  }
+
+  // Send a message to the server
+  sendMessage(): void {
+    this.socketService.sendMessage('message', 'Hello from Angular!');
   }
 
   startProcesses() {
@@ -105,8 +124,9 @@ export class DashboardComponent implements OnInit {
     this.postService.saveState('orders', this.orders);
   }
   handleOrder2(req: any) {
-      this.orders.push(req);
-      this.playSound(this.orderSound);
+    req.timeDate = this.getTimeDate();
+    this.orders.push(req);
+    this.playSound(this.orderSound);
     console.log(this.orders);
     this.postService.saveState('orders', this.orders);
   }
@@ -119,6 +139,15 @@ export class DashboardComponent implements OnInit {
   }
 
   handleOccupiedTable(req: any) {
+    if (req.table) {
+      req.table.timeDate = this.getTimeDate();
+      this.tables.push(req.table);
+      this.playSound(this.tableSound);
+    }
+    console.log(this.tables);
+    this.postService.saveState('tables', this.tables);
+  }
+  handleOccupiedTable2(req: any) {
     if (req.table) {
       req.table.timeDate = this.getTimeDate();
       this.tables.push(req.table);

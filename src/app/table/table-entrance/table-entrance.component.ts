@@ -21,6 +21,7 @@ export class TableEntranceComponent implements OnInit {
     if (this.postService.isTableEntered()) {
       this.router.navigateByUrl('/table');
     }
+    
   }
   ngOnDestroy(): void {
     this.tableExistsSub.unsubscribe();

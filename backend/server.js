@@ -47,23 +47,8 @@ const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
 
 const server = http.createServer(app);
+require('./socket')(server);
 
-const io = require('socket.io')(server, {
-  cors: { origin: "*" }
-});
-
-io.on('connection', (socket) => {
-  console.log('a user connected');
-
-  socket.on('message', (message) =>     {
-      console.log(message);
-      io.emit('message', `${socket.id.substr(0,2)} said ${message}` );
-  });
-  socket.on('order', (message) =>     {
-      console.log(message);
-      io.emit('order', message );
-  });
-});
 server.on("error", onError);
 server.on("listening", onListening);
 console.log({port})
