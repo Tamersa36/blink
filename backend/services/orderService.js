@@ -1,4 +1,5 @@
-const Order = require("./models/order");
+// orderService.js
+const Order = require("../models/order");
 
 const saveOrderToDB = async (tableId, content, status) => {
   const order = new Order({
@@ -6,7 +7,14 @@ const saveOrderToDB = async (tableId, content, status) => {
     content: content,
     status: status,
   });
-  return order.save();
+
+  try {
+    const savedOrder = await order.save();
+    return savedOrder;
+  } catch (error) {
+    console.error(`Error saving order: ${error}`);
+    throw error;
+  }
 };
 
-module.exports = orderSer;
+module.exports = { saveOrderToDB };
