@@ -4,6 +4,8 @@ const router = express.Router();
 
 const Order = require("../models/order");
 
+const mongoose = require("mongoose");
+
 //post api
 //add new order
 router.post("/api/orders", (req, res, next) => {
@@ -39,6 +41,35 @@ router.get("/api/order", (req, res, next) => {
       order: docs,
     });
   });
+});
+
+router.post("/api/updateOrderStatus", async (req, res, next) => {
+  try {
+    const orderId = req.body.orderId;
+    console.log(req.body)
+    console.log({orderId})
+    const updatedOrder = await Order.findByIdAndUpdate(
+      orderId,
+      { $set: { status: "COMPLETED" } },
+      { new: true }
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json({
+        message: "Order not found",
+      });
+    }
+
+    res.status(200).json({
+      message: "Order Status Updated Successfully!",
+      updatedOrder,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
 });
 
 module.exports = router;

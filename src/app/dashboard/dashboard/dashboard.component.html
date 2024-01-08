@@ -32,7 +32,7 @@
         <mat-grid-list cols="1" rowHeight="4:1">
           <mat-grid-tile>
             <div class="ordersContainer" *ngFor="let key of orders; index as i">
-              <button mat-fab (click)="onCompleteOrder(i)">
+              <button mat-fab (click)="onCompleteOrder(i,key._id)">
                 <mat-icon>close</mat-icon>
               </button>
               <mat-card class="orderCard">
@@ -40,7 +40,7 @@
                   <div class="tableNumber">Table {{ key.tableId }}</div>
                 </div>
                 <div class="orderContent">{{ key.content }}</div>
-                <div class="dateTime">{{ key.timeDate }}</div>
+                <div class="dateTime">{{ key.createdAt }}</div>
               </mat-card>
             </div>
           </mat-grid-tile>

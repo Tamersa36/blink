@@ -17,11 +17,11 @@ export class PostService {
   //post order
   addOrder(tableId: string, content: string, status: string) {
     const order: Order = {
-      id: '',
       tableId: tableId,
       content: content,
       status: status,
-      timeDate: '',
+      createdAt: '',
+      closedAt: '',
     };
     return this.http.post<{ message: string }>(
       environment.API_END_POINT + '/api/orders',
@@ -58,6 +58,25 @@ export class PostService {
     );
   }
 
+  //when user leave update table status from OCCUPIED to EMPTY
+  // updateOrderStatus(orderId: string) {
+  //   let params = new HttpParams();
+  //   params = params.append('_id', orderId);
+  //   return this.http.post<{ message: string; order: Order }>(
+  //     environment.API_END_POINT + '/api/updateOrderStatus',
+  //     { params: params }
+  //   );
+  // }
+  updateOrderStatus(orderId: string) {
+    const order: any = {
+      orderId: orderId,
+    };
+    return this.http.post<{ message: string }>(
+      environment.API_END_POINT + '/api/updateOrderStatus',
+      order
+    );
+  }
+
   //check if table entered the system and add it to dashboard
   getOccupiedTables() {
     return this.http.get<{ message: string; table: Table }>(
@@ -84,20 +103,20 @@ export class PostService {
   onLeaveTable() {
     return this.http.get<{ message: string; table: Table }>(
       environment.API_END_POINT + '/api/leaveTable'
-      );
-    }
+    );
+  }
 
-    //check if table exist in DB
-    getTableCredentials(tableId: string, password: string) {
-      let params = new HttpParams();
+  //check if table exist in DB
+  getTableCredentials(tableId: string, password: string) {
+    let params = new HttpParams();
     params = params.append('tableId', tableId);
     params = params.append('password', password);
     return this.http.get<{ message: string; table: Table }>(
       environment.API_END_POINT + '/api/table',
       { params: params }
-      );
-    }
-    //check if table exist in DB
+    );
+  }
+  //check if table exist in DB
   userAuth(userName: string, password: string) {
     let params = new HttpParams();
     params = params.append('Authorization', btoa(userName + ':' + password));
@@ -106,20 +125,20 @@ export class PostService {
       {
         params: params,
       }
-      );
-    }
+    );
+  }
 
-    //get all tables
-    getAllMenuItems() {
-      return this.http.get<{ message: string; menu: Menu }>(
-        environment.API_END_POINT + '/api/menuItems'
-      );
-    }
-       //CRUD Tables
+  //get all tables
+  getAllMenuItems() {
+    return this.http.get<{ message: string; menu: Menu }>(
+      environment.API_END_POINT + '/api/menuItems'
+    );
+  }
+  //CRUD Tables
   addItem(item: string) {
     const menu: Menu = {
       id: '',
-      item: item
+      item: item,
     };
     return this.http.post<{ message: string }>(
       environment.API_END_POINT + '/api/addMenuItem',
@@ -136,7 +155,7 @@ export class PostService {
       }
     );
   }
-    //CRUD Tables
+  //CRUD Tables
   addTable(tableId: string, password: string) {
     const table: Table = {
       id: '',

@@ -16,12 +16,19 @@ module.exports = (server) => {
     });
 
     socket.on("order", async (orderData) => {
-      await saveOrderToDB(
-        orderData.tableId,
-        orderData.content,
-        orderData.status
-      );
-      io.emit("order", orderData);
+      try {
+        const savedOrder = await saveOrderToDB(
+          orderData.tableId,
+          orderData.content,
+          orderData.status
+        );
+        io.emit("order", {
+          ...savedOrder.toObject(), // Convert Mongoose document to a plain JavaScript object
+          _id: savedOrder._id.toString(), // Convert _id to string
+        });
+      } catch (error) {
+        console.error("Error processing order:", error);
+      }
     });
   });
   const saveOrderToDB = async (tableId, content, status) => {
@@ -30,6 +37,15 @@ module.exports = (server) => {
       content: content,
       status: status,
     });
-    return order.save();
+
+    try {
+      const savedOrder = await order.save();
+      console.log(savedOrder._id);
+      console.log(`Order with ID ${savedOrder._id} saved successfully.`);
+      return savedOrder;
+    } catch (error) {
+      console.error(`Error saving order: ${error}`);
+      throw error; // Re-throw the error to be handled by the calling code
+    }
   };
 };

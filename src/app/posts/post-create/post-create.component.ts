@@ -34,17 +34,13 @@ export class PostCreateComponent implements OnInit {
     if (!this.postService.isTableEntered()) this.router.navigateByUrl('');
     this.tableId = sessionStorage.getItem('tableId');
     console.log('table id from order: ', this.tableId);
-
   }
   sendMessage() {
     const order: Order = {
-      id: '',
       tableId: this.tableId,
       content: 'send me bill',
-      status: 'CREATED',
-      timeDate: '',
     };
-    this.socketService.sendMessage('order', order)
+    this.socketService.sendMessage('order', order);
     this.onPopup();
   }
 

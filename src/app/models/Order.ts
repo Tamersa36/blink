@@ -1,7 +1,8 @@
 export interface Order {
-  id: string;
+  _id?: string;
   tableId: string;
   content: string;
-  status: string;
-  timeDate: string;
+  status?: string;
+  createdAt?: string;
+  closedAt?: string;
 }

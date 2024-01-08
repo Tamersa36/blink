@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
     this.messageSubscription = this.socketService
       .onMessage('order')
       .subscribe((order: Order) => {
-        console.log('Received order:', {order});
+        console.log('Received order:', { order });
         this.handleOrder2(order);
       });
     this.messageSubscription = this.socketService
@@ -124,7 +124,7 @@ export class DashboardComponent implements OnInit {
     this.postService.saveState('orders', this.orders);
   }
   handleOrder2(req: any) {
-    req.timeDate = this.getTimeDate();
+    req.createdAt = this.getTimeDate();
     this.orders.push(req);
     this.playSound(this.orderSound);
     console.log(this.orders);
@@ -175,10 +175,19 @@ export class DashboardComponent implements OnInit {
     this.postService.saveState('tables', this.tables);
   }
 
-  onCompleteOrder(i: any) {
-    this.orders.splice(i, 1);
-    console.log('compelete', this.orders);
-    this.postService.saveState('orders', this.orders);
+  // onCompleteOrder(i: any, id: any) {
+  //   console.log({id})
+  //   this.postService.updateOrderStatus(id);
+  //   this.orders.splice(i, 1);
+  //   console.log('compelete', this.orders);
+  //   this.postService.saveState('orders', this.orders);
+  // }
+  onCompleteOrder(i: any, orderId: any) {
+    this.postService.updateOrderStatus(orderId).subscribe((res) => {
+      this.orders.splice(i, 1);
+      this.postService.saveState('orders', this.orders);
+      console.log(res);
+    });
   }
 
   onChange(checked: any) {
