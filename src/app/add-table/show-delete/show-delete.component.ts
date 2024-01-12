@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Table } from 'src/app/models/Table';
 import { PostService } from 'src/app/services/post.service';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
 import { NgForm } from '@angular/forms';
 
 @Component({

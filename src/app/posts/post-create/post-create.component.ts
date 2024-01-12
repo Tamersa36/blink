@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { Router } from '@angular/router';
 import { OrderComponent } from '../order/order.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { PopupComponent } from '../popup/popup.component';
 import { FeedbackComponent } from '../feedback/feedback/feedback.component';
 import { SocketService } from 'src/app/services/socket.service';
