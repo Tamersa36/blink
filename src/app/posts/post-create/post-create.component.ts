@@ -7,6 +7,7 @@ import { PopupComponent } from '../popup/popup.component';
 import { FeedbackComponent } from '../feedback/feedback/feedback.component';
 import { SocketService } from 'src/app/services/socket.service';
 import { Order } from 'src/app/models/Order';
+import { OrderRequest } from 'src/app/models/OrderRequest';
 
 @Component({
   selector: 'app-post-create',
@@ -35,15 +36,6 @@ export class PostCreateComponent implements OnInit {
     this.tableId = sessionStorage.getItem('tableId');
     console.log('table id from order: ', this.tableId);
   }
-  sendMessage() {
-    const order: Order = {
-      tableId: this.tableId,
-      content: 'send me bill',
-    };
-    this.socketService.sendMessage('order', order);
-    this.onPopup();
-  }
-
   openDialog(): void {
     const dialogRef = this.dialog.open(OrderComponent, {
       width: '500px',
@@ -77,29 +69,56 @@ export class PostCreateComponent implements OnInit {
   }
 
   onCallWaiter() {
-    this.postService
-      .addOrder(this.tableId, 'Call Waiter', 'CREATED')
-      .subscribe((responseData) => {
-        console.log(responseData.message);
-        this.onPopup();
-      });
+    const order: Order = {
+      type: 'CallWaiter',
+      tableId: this.tableId,
+      content: 'Call Waiter',
+    };
+    this.socketService.sendMessage('order', order);
+    this.onPopup();
   }
+  // onCallWaiter() {
+  //   this.postService
+  //     .addOrder(this.tableId, 'Call Waiter', 'CREATED')
+  //     .subscribe((responseData) => {
+  //       console.log(responseData.message);
+  //       this.onPopup();
+  //     });
+  // }
   onNeedWater() {
-    this.postService
-      .addOrder(this.tableId, 'Need Water', 'CREATED')
-      .subscribe((responseData) => {
-        console.log(responseData.message);
-        this.onPopup();
-      });
+    const order: Order = {
+      type: 'NeedWater',
+      tableId: this.tableId,
+      content: 'Need Water',
+    };
+    this.socketService.sendMessage('order', order);
+    this.onPopup();
   }
+  // onNeedWater() {
+  //   this.postService
+  //     .addOrder(this.tableId, 'Need Water', 'CREATED')
+  //     .subscribe((responseData) => {
+  //       console.log(responseData.message);
+  //       this.onPopup();
+  //     });
+  // }
   onSendMeBill() {
-    this.postService
-      .addOrder(this.tableId, 'Send Me Bill', 'CREATED')
-      .subscribe((responseData) => {
-        console.log(responseData.message);
-        this.onPopup();
-      });
+    const order: Order = {
+      type: 'SendMeBill',
+      tableId: this.tableId,
+      content: 'Send Me Bill',
+    };
+    this.socketService.sendMessage('order', order);
+    this.onPopup();
   }
+  // onSendMeBill() {
+  //   this.postService
+  //     .addOrder(this.tableId, 'Send Me Bill', 'CREATED')
+  //     .subscribe((responseData) => {
+  //       console.log(responseData.message);
+  //       this.onPopup();
+  //     });
+  // }
   onAskForMenu() {
     const url = 'https://www.olden-menu.online';
     window.open(url, '_blank');

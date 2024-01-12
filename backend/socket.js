@@ -14,14 +14,40 @@ module.exports = (server) => {
       console.log(message);
       io.emit("message", `${socket.id.substr(0, 2)} said ${message}`);
     });
-
     socket.on("order", async (orderData) => {
+      console.log({ orderData });
       try {
-        const savedOrder = await orderService.saveOrderToDB(
-          orderData.tableId,
-          orderData.content,
-          orderData.status
-        );
+        let savedOrder;
+
+        switch (orderData.type) {
+          case "SendMeBill":
+            savedOrder = await orderService.saveOrderToDB(
+              orderData.tableId,
+              orderData.content,
+              orderData.status
+            );
+            break;
+
+          case "NeedWater":
+            savedOrder = await orderService.saveOrderToDB(
+              orderData.tableId,
+              orderData.content,
+              orderData.status
+            );
+            break;
+
+          case "CallWaiter":
+            savedOrder = await orderService.saveOrderToDB(
+              orderData.tableId,
+              orderData.content,
+              orderData.status
+            );
+            break;
+
+          default:
+            console.error("Unknown order type:", orderData.type);
+            return;
+        }
 
         io.emit("order", {
           ...savedOrder.toObject(),

@@ -17,7 +17,6 @@ export class SocketService {
   }
 
   // Listen for a specific event from the server
-  // Listen for a specific event from the server
   onMessage(eventName: string): Observable<any> {
     return new Observable((observer) => {
       const handler = (data: any) => observer.next(data);
