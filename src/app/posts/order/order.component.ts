@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class OrderComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<OrderComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _formBuilder: FormBuilder,
+    private _formBuilder: UntypedFormBuilder,
     private postService: PostService
   ) {}
 
