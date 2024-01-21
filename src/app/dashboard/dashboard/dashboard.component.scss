@@ -37,13 +37,13 @@ mat-grid-tile {
   text-align: center;
 
   .orderCard {
-    padding-top: 40px;
     background-color: white;
+    padding: 26px 10px 10px 10px;
   }
 
   .tableCard {
-    padding-top: 30px;
     background-color: white;
+    padding: 26px 10px 10px 10px;
   }
 
   .orderContent {
@@ -61,6 +61,14 @@ mat-grid-tile {
     background-color: #DD9200;
     z-index: 1;
   }
+  .mat-mdc-fab.mat-accent, .mat-mdc-mini-fab.mat-accent {
+    --mdc-fab-container-color: #DD9200;
+    --mdc-fab-icon-color: white;
+    --mat-mdc-fab-color: #fff;
+    left: 60px;
+    top: 35px;
+    z-index: 1;
+}
 
   .dateTime {
     font-size: 15px;
