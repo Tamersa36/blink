@@ -15,15 +15,17 @@
     align-items: center;
     width: 100%;
 
-    .mat-button {
-      font-weight: bold;
-      background: white;
-      font-size: 15px;
-    }
 
     .translation {
       display: flex;
       align-items: center;
+
+      .mat-mdc-button:not(:disabled) {
+        font-weight: bold;
+        background-color: white;
+        font-size: 15px;
+        color: #DD9200
+    }
 
       .filler {
         flex: 1;

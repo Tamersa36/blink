@@ -1,6 +1,11 @@
 .main {
   background-color: #dd930014;
   padding-bottom: 20%;
+
+}
+.mat-mdc-unelevated-button.mat-primary {
+  --mdc-filled-button-container-color: #ffffff00;
+  --mdc-filled-button-label-text-color: #fff;
 }
 
 .logo-container {
@@ -31,11 +36,8 @@
 }
 
 mat-card {
-  // margin-top: 2%;
-  margin-left: 10px;
-  margin-right: 10px;
-  // padding-top: 45px;
-  // padding-bottom: 80px;
+  margin: 0px 10px 10px 10px;
+  padding: 20px 20px 20px 20px;
 }
 
 p {
@@ -58,6 +60,10 @@ textarea {
   border-radius: 10px;
   background: #01AF29;
   color: white;
+
+  .button{
+    color: #01AF29;
+  }
 }
 
 .askForMenu {
