@@ -1,3 +1,15 @@
-<mat-toolbar class="mat-toolbar mat-primary mat-toolbar-single-row"
-  >Blink</mat-toolbar
->
+<mat-toolbar class="mat-toolbar mat-primary mat-toolbar-single-row">
+  <div class="header">
+    <div class="logo"><img src="../../assets/logo-white.svg" alt="" /></div>
+    <div class="translation">
+      <button mat-button [matMenuTriggerFor]="menu">
+        {{ "languageName" | translate }}
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="switchLanguage('he')" mat-menu-item>עברית</button>
+        <button (click)="switchLanguage('en')" mat-menu-item>English</button>
+        <button (click)="switchLanguage('ar')" mat-menu-item>العربيه</button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>

@@ -1,3 +1,37 @@
-.mat-toolbar{
+.mat-toolbar.mat-primary.mat-toolbar-single-row {
   background-color: #DD9200;
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 16px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  height: var(--mat-toolbar-standard-height);
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .mat-button {
+      font-weight: bold;
+      background: white;
+      font-size: 15px;
+    }
+
+    .logo {
+      // Optionally, you can add styles for the logo
+    }
+
+    .translation {
+      display: flex;
+      align-items: center;
+
+      .filler {
+        flex: 1;
+      }
+    }
+  }
 }

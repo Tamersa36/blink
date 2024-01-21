@@ -3,12 +3,19 @@
   <mat-divider></mat-divider>
   <br />
   <mat-card>
-    <div class="tableNumber">Table {{ tableId }}</div>
+    <div class="logo-container">
+      <div class="logo">
+        <!-- Placeholder logo (replace with your actual logo) -->
+        <mat-icon>restaurant_menu</mat-icon>
+      </div>
+    </div>
+    <div class="tableNumber">{{ "table" | translate }} {{ tableId }}</div>
+
     <mat-grid-list cols="1" rowHeight="4:1">
       <mat-grid-tile (click)="onCallWaiter()" class="callWaiter">
         <button class="callWaiter" mat-flat-button color="primary">
           <mat-icon class="inline">room_service</mat-icon>
-          Call Waiter
+          {{ "callWaiter" | translate }}
         </button>
       </mat-grid-tile>
     </mat-grid-list>
@@ -22,7 +29,7 @@
           </section>
           <section class="header-start">
             <button class="needWater" mat-flat-button color="primary">
-              Need Water
+              {{ "needWater" | translate }}
             </button>
           </section>
         </div>
@@ -34,7 +41,7 @@
           </section>
           <section class="header-start">
             <button class="askForMenu" mat-flat-button color="primary">
-              Ask For Menu
+              {{ "menu" | translate }}
             </button>
           </section>
         </div>
@@ -52,7 +59,7 @@
               mat-flat-button
               color="primary"
             >
-              Self Ordering
+              {{ "selfOrdering" | translate }}
             </button>
           </section>
         </div>
@@ -64,7 +71,7 @@
           </section>
           <section class="header-start">
             <button class="sendMeBill" mat-flat-button color="primary">
-              Send Me Bill
+              {{ "sendMeBill" | translate }}
             </button>
           </section>
         </div>
@@ -76,7 +83,7 @@
       <mat-grid-tile (click)="onLeaveTable()" class="leaveTable">
         <button class="leaveTable" mat-flat-button color="primary">
           <mat-icon class="inlineCancel">cancel</mat-icon>
-          Leave Table
+          {{ "leaveTable" | translate }}
         </button>
       </mat-grid-tile>
     </mat-grid-list>

@@ -3,11 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
 import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
 import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import {MatMenuModule} from '@angular/material/menu';
+
+
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -36,6 +39,12 @@ import { OrderComponent } from './posts/order/order.component';
 import { PopupComponent } from './posts/popup/popup.component';
 import { FeedbackComponent } from './posts/feedback/feedback/feedback.component';
 import { AddMenuItemComponent } from './add-menu-item/add-menu-item/add-menu-item.component';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -76,7 +85,15 @@ import { AddMenuItemComponent } from './add-menu-item/add-menu-item/add-menu-ite
     MatChipsModule,
     MatGridListModule,
     MatDividerModule,
+    MatMenuModule,
     HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

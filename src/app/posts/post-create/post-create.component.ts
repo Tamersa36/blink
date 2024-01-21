@@ -124,11 +124,17 @@ export class PostCreateComponent implements OnInit {
     window.open(url, '_blank');
   }
   onLeaveTable() {
-    this.postService.updateTableStatus(this.tableId).subscribe((res) => {
-      console.log(res);
-      sessionStorage.clear();
-      console.log(sessionStorage);
-    });
+    this.socketService.sendMessage('leaveTable', this.tableId);
+    // sessionStorage.clear();
+    // console.log(sessionStorage);
     this.onFeedBack();
   }
+  // onLeaveTable() {
+  //   this.postService.updateTableStatus(this.tableId).subscribe((res) => {
+  //     console.log(res);
+  //     sessionStorage.clear();
+  //     console.log(sessionStorage);
+  //   });
+  //   this.onFeedBack();
+  // }
 }

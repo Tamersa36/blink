@@ -1,19 +1,23 @@
-:root{
+:root {
   --primary: #DD9200;
 }
+
 :host {
   display: flex;
   flex-direction: column;
   height: 100%;
 }
+
 mat-drawer {
   width: 250px;
 }
 
 mat-drawer-container {
   height: 100%;
+  position: inherit;
 }
-mat-card-header{
+
+mat-card-header {
   font-size: 17px;
   font-weight: bold;
   padding-bottom: 7px;
@@ -22,22 +26,27 @@ mat-card-header{
 mat-drawer-content {
   padding: 20px;
 }
-mat-grid-tile{
+
+mat-grid-tile {
   background-color: #dd930014;
 }
-.ordersContainer{
+
+.ordersContainer {
   padding-left: 15px;
   padding-right: 15px;
   text-align: center;
 
-  .orderCard{
+  .orderCard {
     padding-top: 40px;
-  }
-  .tableCard{
-    padding-top: 30px;
+    background-color: white;
   }
 
-  .orderContent{
+  .tableCard {
+    padding-top: 30px;
+    background-color: white;
+  }
+
+  .orderContent {
     font-size: 16px;
     color: #DD9200;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -45,25 +54,27 @@ mat-grid-tile{
 
 
   }
+
   .mat-fab {
-    left:60px;
-    top:35px;
+    left: 60px;
+    top: 35px;
     background-color: #DD9200;
     z-index: 1;
   }
 
-  .dateTime{
+  .dateTime {
     font-size: 15px;
   }
 }
-.active{
+
+.active {
   font-size: 16px;
   color: forestgreen;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   padding-bottom: 6px;
 }
 
-.tableNumber{
+.tableNumber {
   font-size: 20px;
   font-weight: bold;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

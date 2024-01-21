@@ -51,11 +51,17 @@ export class DashboardComponent implements OnInit {
       });
     this.messageSubscription = this.socketService
       .onMessage('table')
-      .subscribe((text: string) => {
-        console.log('table entered:', text);
-        this.jsonObject = JSON.parse(text);
-        this.handleOccupiedTable2(this.jsonObject);
+      .subscribe((table: Table) => {
+        console.log('table entered:', table);
+        this.handleOccupiedTable2(table);
       });
+    this.messageSubscription = this.socketService
+      .onMessage('DashboardTableLeft')
+      .subscribe((table: Table) => {
+        console.log('table left:', table);
+        this.handleTableLeft(table);
+      });
+
     // this.startProcesses();
     this.loadState();
   }
@@ -148,9 +154,10 @@ export class DashboardComponent implements OnInit {
     this.postService.saveState('tables', this.tables);
   }
   handleOccupiedTable2(req: any) {
-    if (req.table) {
-      req.table.timeDate = this.getTimeDate();
-      this.tables.push(req.table);
+    console.log({ req });
+    if (req) {
+      req.timeDate = this.getTimeDate();
+      this.tables.push(req);
       this.playSound(this.tableSound);
     }
     console.log(this.tables);
@@ -163,11 +170,11 @@ export class DashboardComponent implements OnInit {
       this.handleTableLeft(request);
     });
   }
-
   handleTableLeft(req: any) {
-    if (req.table) {
+    console.log({req})
+    if (req) {
       this.tables.splice(
-        this.tables.findIndex((t) => t.tableId === req.table.tableId),
+        this.tables.findIndex((t) => t.tableId === req.tableId),
         1
       );
     }

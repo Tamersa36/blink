@@ -1,17 +1,44 @@
-.main{
+.main {
   background-color: #dd930014;
   padding-bottom: 20%;
 }
 
-mat-card{
-  margin-top: 2%;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding-top: 45px;
-  padding-bottom: 80px;
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px; // Adjust as needed
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; // Adjust the size of the logo
+    height: 60px; // Adjust the size of the logo
+    background-color: #DD9200; // Background color of the logo
+    border-radius: 50%; // Make it a circle
+
+    mat-icon {
+      color: white; // Color of the logo/icon
+    }
+  }
 }
 
-p{
+.tableNumber {
+  text-align: center;
+  font-size: 18px; // Adjust the font size as needed
+  font-weight: bold; // Adjust the font weight as needed
+}
+
+mat-card {
+  // margin-top: 2%;
+  margin-left: 10px;
+  margin-right: 10px;
+  // padding-top: 45px;
+  // padding-bottom: 80px;
+}
+
+p {
   text-align: center;
   font-size: 17px;
   font-weight: bold;
@@ -19,11 +46,11 @@ p{
 }
 
 mat-form-field,
-textarea{
+textarea {
   width: 100%;
 }
 
-.callWaiter{
+.callWaiter {
   padding-left: 3px;
   font-weight: bold;
   padding-right: 2px;
@@ -32,7 +59,8 @@ textarea{
   background: #01AF29;
   color: white;
 }
-.askForMenu{
+
+.askForMenu {
   font-weight: bold;
   margin-left: 3px;
   font-size: 18px;
@@ -40,7 +68,8 @@ textarea{
   background: #D3B90A;
   color: white;
 }
-.readyToOrder{
+
+.readyToOrder {
   font-weight: bold;
   margin-right: 3px;
   font-size: 18px;
@@ -48,7 +77,8 @@ textarea{
   background: #8EB62F;
   color: white;
 }
-.needWater{
+
+.needWater {
   margin-right: 3px;
   font-weight: bold;
   font-size: 18px;
@@ -57,7 +87,8 @@ textarea{
   padding-top: 5px;
   color: white;
 }
-.sendMeBill{
+
+.sendMeBill {
   margin-left: 3px;
   font-weight: bold;
   font-size: 18px;
@@ -66,7 +97,7 @@ textarea{
   color: white;
 }
 
-.leaveTable{
+.leaveTable {
   font-weight: bold;
   padding-left: 3px;
   padding-right: 2px;
@@ -76,20 +107,20 @@ textarea{
   color: white;
 }
 
-mat-icon{
+mat-icon {
   transform: scale(1.8);
 }
 
-.spacer{
+.spacer {
   padding-top: 2px;
   padding-bottom: 2px;
 }
 
-.verticalSpace{
+.verticalSpace {
   padding-inline: 5px;
 }
 
-.tableNumber{
+.tableNumber {
   text-align: center;
   font-size: 22px;
   font-weight: bold;
@@ -97,18 +128,20 @@ mat-icon{
   padding-bottom: 15px;
 
 }
-.header{
+
+.header {
   padding-top: 20px;
   text-align: center;
   color: white;
   transform: scale(1.4);
   padding-bottom: 10px;
 }
-.inline{
+
+.inline {
   padding-inline: 10px;
 }
 
-.inlineCancel{
+.inlineCancel {
   padding-inline: 10px;
   transform: scale(1.6);
 }
