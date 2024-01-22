@@ -10,7 +10,8 @@ router.get('/api/user', (req, res, next)=>{
     .then(docs =>{
       res.status(200).json({
         message: 'user fetched successfully!',
-        user: docs? "true":"false"
+        user: docs? "true":"false",
+        res: docs
       });
     });
 });

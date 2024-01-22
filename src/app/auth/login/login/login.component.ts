@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
   check(request: any, username: string) {
     if (request.user === 'true') {
       sessionStorage.setItem('admin', username);
+      sessionStorage.setItem('tenantId', request.res.tenantId);
       this.router.navigateByUrl('/dashboard');
     } else {
       console.log('nono');

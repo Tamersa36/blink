@@ -10,6 +10,7 @@ const ordersSchema = mongoose.Schema({
   },
   createdAt: { type: Date, default: Date.now },
   closedAt: { type: Date },
+  // tenantId: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Order", ordersSchema);

@@ -1,7 +1,7 @@
 <mat-nav-list>
   <div class="profile-card">
     <div class="header">
-      <h3>Admin Dashboard</h3>
+      <h3>{{ resturantName | titlecase }} Dashboard</h3>
     </div>
     <img src="../../assets/logo.svg" alt="Blink" />
   </div>
@@ -25,7 +25,11 @@
     <mat-icon>add</mat-icon>
     Add Table
   </a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/addMenuItem">
+  <a
+    mat-list-item
+    routerLinkActive="list-item-active"
+    routerLink="/addMenuItem"
+  >
     <mat-icon>restaurant</mat-icon>
     Menu Items
   </a>
