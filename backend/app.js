@@ -7,8 +7,20 @@ const tablesRoutes = require("./routes/tables");
 const usersRoutes = require("./routes/users");
 const defaultRoutes = require("./routes/default");
 const menuRoutes = require("./routes/menu");
+const session = require("express-session");
+const cors = require("cors");
+
+const setTenantIdMiddleware = require("./tenantMiddleware");
 
 const app = express();
+app.use(cors());
+app.use(
+  session({
+    secret: "mosketo",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 mongoose
   .connect(
@@ -40,6 +52,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(setTenantIdMiddleware);
 app.use(ordersRoutes);
 app.use(tablesRoutes);
 app.use(usersRoutes);

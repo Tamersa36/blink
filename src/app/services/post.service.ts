@@ -219,6 +219,9 @@ export class PostService {
     let admin = sessionStorage.getItem('admin');
     return !(admin === null);
   }
+  getTenantId() {
+    return sessionStorage.getItem('tenantId');
+  }
 
   logOut() {
     sessionStorage.removeItem('admin');

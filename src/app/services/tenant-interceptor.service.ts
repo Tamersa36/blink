@@ -19,12 +19,12 @@ export class TenantInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     // Get the tenantId from your authentication service or session
-    const tenantId = '1'; // Replace with your actual logic to retrieve tenantId
+    const tenantId: string | null = this.postService.getTenantId(); // Adjust the type to match your actual logic
 
     // Clone the request and add the tenantId as a custom header
     const modifiedRequest = req.clone({
       setHeaders: {
-        'X-Tenant-Id': tenantId,
+        'X-Tenant-Id': tenantId || '', // Default to an empty string if tenantId is null
       },
     });
 

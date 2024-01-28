@@ -99,11 +99,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: TenantInterceptorService,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TenantInterceptorService,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
